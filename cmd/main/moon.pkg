@@ -1,0 +1,9 @@
+import {
+  "username/moonbit-gltf-tools/gltf",
+  "moonbitlang/x/fs",
+  "moonbitlang/core/env",
+}
+
+options(
+  "is-main": true,
+)
