@@ -1,80 +1,220 @@
 # moonbit-gltf-tools
 
-A high-performance, lightweight glTF 2.0 and GLB asset parsing, validation, and optimization tool library written in pure MoonBit.
+[![CI](https://github.com/hzfhzf89/moonbit-gltf-tools/actions/workflows/test.yml/badge.svg)](https://github.com/hzfhzf89/moonbit-gltf-tools/actions/workflows/test.yml)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
-## Features
+A MoonBit toolkit for inspecting, validating, and optimizing glTF 2.0 and GLB
+assets. It is designed for asset importers, build pipelines, CI checks, and
+offline diagnostics—not for rendering.
 
-- **Robust Parser**: Parses standard glTF JSON and unpacks binary GLB containers (with embedded JSON & BIN chunks) securely.
-- **Node Tree Hierarchy Analyzer**: Traverses the node tree, extracts structural hierarchy details, node depths, and skinned/mesh node distributions.
-- **Metadata Extractor**: Inspects meshes, vertex counts, indices, primitive topologies, materials, animations, and samplers.
-- **Resource Dependency Tracker**: Detects external asset references (URIs), embedded images (base64 data URIs), and internal buffers to generate asset manifests.
-- **Asset Validator**: Validates reference integrity, index bounds, cycle detection in scene graphs, and Khronos specification compliance.
-- **Optimization Reporter**: Evaluates asset configurations, identifies unindexed primitives, warns on excessive draw calls, and identifies unused materials/textures to produce actionable optimization suggestions.
+## Project positioning
 
-## Installation
+moonbit-gltf-tools helps catch malformed or inefficient 3D assets before they
+reach a runtime or an editor. The library keeps parsing and analysis
+deterministic: external URIs are reported as dependencies and are not read
+implicitly during parsing.
 
-Add this dependency to your `moon.mod`:
+The project currently focuses on:
 
-```json
+- glTF 2.0 JSON documents and GLB containers;
+- structural validation and actionable diagnostics;
+- scene graph, transform, resource, accessor, and mesh analysis;
+- machine-readable reports for automation;
+- a native CLI for local inspection and CI integration.
+
+## Core capabilities
+
+### Parsing
+
+- Parse glTF 2.0 JSON into strongly typed MoonBit data structures.
+- Unpack GLB headers, JSON chunks, and optional BIN chunks.
+- Decode the core scene, mesh, material, texture, image, animation, skin,
+  accessor, buffer, and buffer view structures.
+
+### Validation and diagnostics
+
+- Validate reference bounds across scenes, nodes, meshes, materials, buffers,
+  accessors, animations, and skins.
+- Detect scene graph cycles and invalid child references.
+- Check accessor element sizes, byte strides, alignment, buffer view windows, and
+  normalization constraints.
+- Produce configurable diagnostic summaries with severity, code, path, message,
+  and remediation hints.
+
+### Analysis and optimization
+
+- Traverse scene graphs and evaluate inherited TRS transforms.
+- Estimate vertices, indices, triangles, draw calls, attribute slots, and vertex
+  memory.
+- Report indexed geometry ratios, missing vertex attributes, material usage,
+  animation channels, and skinning information.
+- Audit embedded and external resource dependencies.
+- Apply configurable quality gates for general and mobile-oriented pipelines.
+
+### Reporting
+
+- Build a single AssetReport from the parser, validator, scene, resource,
+  geometry, and quality-analysis passes.
+- Export stable debug representations for CLI and automation consumers.
+- Inspect URI safety, media types, data URIs, and common asset extensions.
+
+## Quick start
+
+### Prerequisites
+
+Install the current stable MoonBit toolchain and ensure moon is available on
+your PATH.
+
+### Build and test the repository
+
+~~~~bash
+moon update
+moon check --target all --deny-warn
+moon test --target native --deny-warn
+moon test --target wasm-gc --deny-warn
+moon build --target native --deny-warn
+~~~~
+
+### Run the sample asset
+
+The repository includes a small deterministic fixture at
+benchmarks/minimal.gltf.
+
+~~~~bash
+moon run --target native cmd/main benchmarks/minimal.gltf
+moon run --target native cmd/main benchmarks/minimal.gltf --json
+~~~~
+
+The first command prints a human-readable inspection report. The --json
+variant prints the machine-readable asset report for scripts and CI jobs.
+
+## Library usage
+
+Add the package to a MoonBit project with:
+
+~~~~bash
+moon add hzfhzf89/moonbit-gltf-tools
+~~~~
+
+Import the public gltf package:
+
+~~~~mbt nocheck
 import {
-  "username/moonbit-gltf-tools": "0.1.0"
+  "hzfhzf89/moonbit-gltf-tools/gltf"
 }
-```
 
-## Quick Start
-
-### 1. Parsing and Analyzing a Model
-
-```moonbit
-fn main {
-  let json_str =
-    #|{
-    #|  "asset": { "version": "2.0" },
-    #|  "scenes": [{ "nodes": [0] }],
-    #|  "nodes": [{ "mesh": 0, "name": "RootNode" }],
-    #|  "meshes": [{
-    #|    "primitives": [{ "attributes": { "POSITION": 0 } }]
-    #|  }],
-    #|  "accessors": [{ "componentType": 5126, "count": 24, "type": "VEC3" }]
-    #|}
-  
-  // Parse glTF JSON
-  let doc = @gltf.parse_gltf_string(json_str)
-  
-  // Validate model structure
-  let validation = @gltf.validate_document(doc)
-  println("Is valid: \{validation.is_valid}")
-  
-  // Generate optimization report
-  let opt_report = @gltf.analyze_optimization(doc)
-  println("Total Vertices: \{opt_report.total_vertices}")
-  println("Draw Calls: \{opt_report.draw_calls}")
-  println("Suggestions: \{to_repr(opt_report.suggestions)}")
+///|
+fn inspect_asset(json : String) raise {
+  let document = @gltf.parse_gltf_string(json)
+  let report = @gltf.build_default_asset_report(document)
+  println("triangles=\\{report.geometry.triangles}")
+  println("diagnostics=\\{report.diagnostics.errors}")
 }
-```
+~~~~
 
-### 2. Unpacking a GLB File
+For GLB input, call @gltf.unpack_glb first and pass the returned JSON string
+to @gltf.parse_gltf_string.
 
-```moonbit
-fn process_glb(glb_bytes : Bytes) {
-  let unpacked = @gltf.unpack_glb(glb_bytes)
-  let doc = @gltf.parse_gltf_string(unpacked.json_str)
-  println("glTF Version: \{doc.version}")
-}
-```
+## CLI
 
-## CLI Usage
+The CLI accepts a .gltf or .glb path:
 
-To run the command-line interface tool locally:
+~~~~bash
+moon run --target native cmd/main path/to/asset.gltf
+moon run --target native cmd/main path/to/asset.glb
+moon run --target native cmd/main path/to/asset.gltf --json
+~~~~
 
-```bash
-# Build the project
-moon build --target native
+The CLI reports:
 
-# Analyze a glTF or GLB file
-moon run cmd/main -- path/to/model.glb
-```
+1. structural validation results;
+2. scene graph and resource dependency summaries;
+3. mesh and animation metadata;
+4. optimization suggestions;
+5. quality-gate score and violations.
+
+Use --json when another tool should consume the complete AssetReport.
+
+## Architecture
+
+~~~~text
+.
+├── lib.mbt                  # root facade exports
+├── gltf/
+│   ├── types.mbt            # glTF 2.0 data model
+│   ├── parser.mbt           # JSON document parser
+│   ├── glb.mbt              # GLB container handling
+│   ├── validator.mbt        # reference and structure validation
+│   ├── diagnostics.mbt      # configurable diagnostic engine
+│   ├── accessor.mbt         # accessor and buffer layout analysis
+│   ├── scene.mbt            # scene graph and resource analysis
+│   ├── transform.mbt        # TRS/world-transform evaluation
+│   ├── mesh_analysis.mbt    # geometry cost analysis
+│   ├── analyzer.mbt         # optimization suggestions
+│   ├── report.mbt           # unified asset reports
+│   ├── quality.mbt          # quality gates
+│   └── uri.mbt              # URI classification and safety checks
+├── cmd/main/main.mbt        # native command-line entry point
+├── benchmarks/              # deterministic benchmark fixtures
+└── .github/workflows/       # cross-platform CI
+~~~~
+
+The implementation is organized as independent analysis passes over the typed
+document model. Applications can use individual passes or compose them through
+build_asset_report.
+
+## Benchmarks
+
+The benchmark protocol and recorded local baseline are maintained in
+[benchmarks documentation](BENCHMARKS.md). Run the CLI benchmark fixture with:
+
+~~~~bash
+moon run --target native cmd/main benchmarks/minimal.gltf --json
+~~~~
+
+Recorded local baseline (2026-08-18): on Windows PowerShell with the native
+backend, five end-to-end samples were 1739.72, 316.77, 309.28, 386.85, and
+312.15 ms; the median was 316.77 ms. The first sample included native
+build/cache warm-up. The fixture contains one scene and one node, and the JSON
+report contains zero diagnostics. These figures are host-dependent.
+
+Benchmark comparisons should record the MoonBit version, target backend,
+operating system, CPU, sample count, and whether the run includes a cold build.
+Wall-clock results are host-dependent and should not be treated as universal
+performance guarantees.
+
+## Testing
+
+The test suite covers parser behavior, GLB boundaries, reference validation,
+scene cycles, accessor layouts, URI classification, transforms, mesh analysis,
+quality gates, and report generation.
+
+Recommended local checks:
+
+~~~~bash
+moon fmt
+moon check --target all --deny-warn
+moon test --target all --deny-warn
+moon build --target native --deny-warn
+moon info
+~~~~
+
+moon info regenerates the public interface snapshots in pkg.generated.mbti
+files. Review those files when public APIs change.
+
+## CI
+
+The GitHub Actions workflow runs on Ubuntu, macOS, and Windows. It installs
+Node.js and the stable MoonBit toolchain, then runs:
+
+- moon check --target all --deny-warn;
+- native build verification;
+- formatting and public-interface drift checks;
+- moon test --target all --deny-warn.
+
+See the CI workflow at
+.github/workflows/test.yml.
 
 ## License
 
-This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.
+Apache License 2.0. See LICENSE.

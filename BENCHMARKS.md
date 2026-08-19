@@ -1,19 +1,29 @@
 # Benchmark protocol
 
-The benchmark suite measures useful pipeline operations rather than synthetic
-line counts. It uses deterministic in-memory glTF documents and reports the
-median of repeated runs on the local machine. Results are intentionally not
-hard-coded because CPU, MoonBit runtime and backend affect wall-clock values.
+This protocol measures end-to-end CLI processing on deterministic glTF fixtures.
+It reports the median of repeated runs on the local machine. Results are
+host-dependent because CPU, MoonBit runtime, and backend affect wall-clock
+values.
 
-Run the native benchmark harness with:
+Run the native CLI report with:
 
 ```bash
-moon run --target native cmd/main -- --benchmark
+moon run --target native cmd/main benchmarks/minimal.gltf --json
 ```
 
-The report contains document construction time, validation time, scene traversal
-time, resource audit time, and the number of processed nodes/primitives. Record
-the command, MoonBit version, OS, CPU and sample count when comparing releases.
+For a local timing sample on PowerShell, run the same command repeatedly and
+record the reported wall-clock values:
+
+```powershell
+1..5 | ForEach-Object {
+  (Measure-Command {
+    moon run --target native cmd/main benchmarks/minimal.gltf --json | Out-Null
+  }).TotalMilliseconds
+}
+```
+
+Record the command, MoonBit version, OS, CPU, backend, sample count, and whether
+the first sample includes a cold build when comparing releases.
 
 ## Local baseline (2026-08-18)
 
