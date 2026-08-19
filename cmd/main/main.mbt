@@ -2,11 +2,14 @@
 fn main {
   let args = @env.args()
   if args.length() < 2 {
-    println("Usage: moon run cmd/main <file.gltf | file.glb>")
+    println("Usage: moon run cmd/main <file.gltf | file.glb> [--json]")
     return
   }
   let filepath = args[1]
-  println("Loading file: \{filepath}")
+  let json_output = args.contains("--json")
+  if !json_output {
+    println("Loading file: \{filepath}")
+  }
 
   let is_glb = filepath.to_lower().has_suffix(".glb")
 
@@ -42,6 +45,12 @@ fn main {
     }
   }
 
+  if json_output {
+    let report = @gltf.build_default_asset_report(doc)
+    println(@gltf.report_to_json(report))
+    return
+  }
+
   // 1. 验证报告
   println("\n--- 1. Validation Report ---")
   let val_report = @gltf.validate_document(doc)
@@ -61,7 +70,7 @@ fn main {
   println("Max depth: \{tree_info.max_depth}")
   println("Mesh nodes: \{tree_info.mesh_node_count}")
   println("Skinned nodes: \{tree_info.skinned_node_count}")
-  println("Root nodes index: \{to_repr(tree_info.root_nodes)}")
+  println("Root nodes index: \{Repr(tree_info.root_nodes).to_string()}")
 
   // 3. 元数据提取 (Mesh & Animation)
   println("\n--- 3. Mesh & Animation Metadata ---")
@@ -73,7 +82,7 @@ fn main {
       None => "<unnamed>"
     }
     println(
-      "  - Mesh \{i} [\{name}]: Vertex count: \{meta.vertex_count}, Primitives: \{meta.primitive_count}, Indexed: \{meta.has_indices}, Attributes: \{to_repr(meta.attributes)}",
+      "  - Mesh \{i} [\{name}]: Vertex count: \{meta.vertex_count}, Primitives: \{meta.primitive_count}, Indexed: \{meta.has_indices}, Attributes: \{Repr(meta.attributes).to_string()}",
     )
   }
   let anims_meta = @gltf.extract_animation_metadata(doc)
@@ -84,7 +93,7 @@ fn main {
       None => "<unnamed>"
     }
     println(
-      "  - Anim \{i} [\{name}]: Channels: \{meta.channel_count}, Targets: \{to_repr(meta.target_nodes)}, Interpolation: \{to_repr(meta.interpolations)}",
+      "  - Anim \{i} [\{name}]: Channels: \{meta.channel_count}, Targets: \{Repr(meta.target_nodes).to_string()}, Interpolation: \{Repr(meta.interpolations).to_string()}",
     )
   }
 
@@ -110,6 +119,18 @@ fn main {
     println("Suggestions:")
     for suggestion in opt_report.suggestions {
       println("  - [Suggestion] \{suggestion}")
+    }
+  }
+
+  println("\n--- 6. Quality Gate ---")
+  let asset_report = @gltf.build_default_asset_report(doc)
+  let gate = @gltf.quality_gate_default(asset_report)
+  println("Quality score: \{gate.score}/100")
+  if gate.passed {
+    println("[PASS] Asset meets the default quality policy.")
+  } else {
+    for line in @gltf.quality_violation_lines(gate) {
+      println("  - [Quality] \{line}")
     }
   }
 }

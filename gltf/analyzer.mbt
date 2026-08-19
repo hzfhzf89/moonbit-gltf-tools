@@ -115,8 +115,8 @@ pub fn analyze_optimization(doc : GltfDocument) -> OptimizationReport {
   // 1. 统计顶点和 Draw Calls (Primitives 数量)
   let mut total_vertices = 0
   let mut draw_calls = 0
-  let used_materials_map : Map[Int, Bool] = {}
-  let used_textures_map : Map[Int, Bool] = {}
+  let used_materials_map : Map[Int, Bool] = Map([])
+  let used_textures_map : Map[Int, Bool] = Map([])
 
   for mesh in doc.meshes {
     for prim in mesh.primitives {
@@ -173,7 +173,7 @@ pub fn analyze_optimization(doc : GltfDocument) -> OptimizationReport {
   }
 
   // 3. 统计未使用的纹理与图像
-  let used_images_map : Map[Int, Bool] = {}
+  let used_images_map : Map[Int, Bool] = Map([])
   let unused_textures : Array[Int] = []
   for i in 0..<doc.textures.length() {
     if used_textures_map.contains(i) {

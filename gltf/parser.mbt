@@ -121,7 +121,7 @@ fn parse_meshes(root : Map[String, Json]) -> Array[GltfMesh] raise ParseError {
         Some(Json::Object(a)) => a
         _ => {}
       }
-      let attributes : Map[String, Int] = {}
+      let attributes : Map[String, Int] = Map([])
       for k, v in attrs_raw {
         match v {
           Json::Number(n, ..) => attributes[k] = n.to_int()

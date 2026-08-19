@@ -1,9 +1,7 @@
 import {
-  "username/moonbit-gltf-tools/gltf",
+  "hzfhzf89/moonbit-gltf-tools/gltf",
   "moonbitlang/x/fs",
   "moonbitlang/core/env",
 }
 
-options(
-  "is-main": true,
-)
+pkgtype(kind: "executable")

@@ -1,0 +1,68 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "hzfhzf89/moonbit-gltf-tools"
+
+import {
+  "hzfhzf89/moonbit-gltf-tools/gltf",
+}
+
+// Values
+pub fn accessor_layout(@gltf.GltfDocument, Int) -> @gltf.AccessorLayout
+
+pub fn all_mesh_cost_reports(@gltf.GltfDocument) -> Array[@gltf.MeshCostReport]
+
+pub fn analyze_optimization(@gltf.GltfDocument) -> @gltf.OptimizationReport
+
+pub fn build_asset_report(@gltf.GltfDocument, @gltf.DiagnosticPolicy) -> @gltf.AssetReport
+
+pub fn build_default_asset_report(@gltf.GltfDocument) -> @gltf.AssetReport
+
+pub fn bytes_to_utf8_string(Bytes) -> String
+
+pub fn classify_uri(String) -> @gltf.UriKind
+
+pub fn collect_resource_deps(@gltf.GltfDocument) -> @gltf.ResourceDeps
+
+pub fn diagnose(@gltf.GltfDocument, @gltf.DiagnosticPolicy) -> @gltf.DiagnosticSummary
+
+pub fn diagnose_default(@gltf.GltfDocument) -> @gltf.DiagnosticSummary
+
+pub fn diagnose_strict(@gltf.GltfDocument) -> @gltf.DiagnosticSummary
+
+pub fn evaluate_scene_transforms(@gltf.GltfDocument) -> @gltf.TransformReport
+
+pub fn inspect_uri(String) -> @gltf.UriInfo
+
+pub fn node_local_transform(@gltf.GltfNode) -> @gltf.Mat4
+
+pub fn parse_gltf_string(String) -> @gltf.GltfDocument raise @gltf.ParseError
+
+pub fn quality_gate(@gltf.AssetReport, @gltf.QualityThresholds) -> @gltf.QualityGate
+
+pub fn quality_gate_default(@gltf.AssetReport) -> @gltf.QualityGate
+
+pub fn quality_gate_mobile(@gltf.AssetReport) -> @gltf.QualityGate
+
+pub fn quality_violation_lines(@gltf.QualityGate) -> Array[String]
+
+pub fn report_geometry(@gltf.GltfDocument) -> @gltf.GeometryReport
+
+pub fn report_resources(@gltf.GltfDocument) -> @gltf.ResourceReport
+
+pub fn report_to_json(@gltf.AssetReport) -> String
+
+pub fn traverse_node_tree(@gltf.GltfDocument) -> @gltf.NodeTreeInfo
+
+pub fn unpack_glb(Bytes) -> @gltf.GlbData raise @gltf.ParseError
+
+pub fn validate_accessor_layouts(@gltf.GltfDocument) -> Array[@gltf.LayoutIssue]
+
+pub fn validate_document(@gltf.GltfDocument) -> @gltf.ValidationReport
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+pub using @gltf {type GltfDocument}
+
+// Traits

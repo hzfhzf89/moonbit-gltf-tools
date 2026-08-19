@@ -13,7 +13,7 @@ pub(all) struct NodeTreeInfo {
   root_nodes : Array[Int]
   /// 各节点深度映射（节点索引 -> 深度）
   node_depths : Map[Int, Int]
-} derive(Debug, ToJson)
+} derive(Debug, ToJson, Eq)
 
 ///|
 /// 遍历 glTF 场景图，收集节点树信息
@@ -67,8 +67,8 @@ pub(all) struct NodeTreeInfo {
 /// }
 /// ```
 pub fn traverse_node_tree(doc : GltfDocument) -> NodeTreeInfo {
-  let node_depths : Map[Int, Int] = {}
-  let visited : Map[Int, Bool] = {}
+  let node_depths : Map[Int, Int] = Map([])
+  let visited : Map[Int, Bool] = Map([])
   let mut max_depth = 0
   let mut mesh_node_count = 0
   let mut skinned_node_count = 0
@@ -211,7 +211,7 @@ pub(all) struct MeshMetadata {
 pub fn extract_mesh_metadata(doc : GltfDocument) -> Array[MeshMetadata] {
   doc.meshes.map(mesh => {
     let mut primitive_count = 0
-    let attrs_set : Map[String, Bool] = {}
+    let attrs_set : Map[String, Bool] = Map([])
     let material_indices : Array[Int] = []
     let mut has_indices = false
     let mut vertex_count = 0
@@ -269,8 +269,8 @@ pub fn extract_animation_metadata(
 ) -> Array[AnimationMetadata] {
   doc.animations.map(anim => {
     let target_nodes : Array[Int] = []
-    let paths_set : Map[String, Bool] = {}
-    let interp_set : Map[String, Bool] = {}
+    let paths_set : Map[String, Bool] = Map([])
+    let interp_set : Map[String, Bool] = Map([])
     for ch in anim.channels {
       match ch.target.node {
         Some(n) => if !target_nodes.contains(n) { target_nodes.push(n) }

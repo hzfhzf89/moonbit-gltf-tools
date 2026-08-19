@@ -1,10 +1,10 @@
-name = "username/moonbit-gltf-tools"
+name = "hzfhzf89/moonbit-gltf-tools"
 
 version = "0.1.0"
 
 readme = "README.mbt.md"
 
-repository = ""
+repository = "https://github.com/hzfhzf89/moonbit-gltf-tools"
 
 license = "Apache-2.0"
 

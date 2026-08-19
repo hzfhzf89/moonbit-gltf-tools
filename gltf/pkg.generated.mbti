@@ -1,0 +1,810 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "hzfhzf89/moonbit-gltf-tools/gltf"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn accessor_alignment(ComponentType) -> Int
+
+pub fn accessor_component_count(AccessorType) -> Int
+
+pub fn accessor_element_size(GltfAccessor) -> Int
+
+pub fn accessor_is_index_compatible(GltfAccessor) -> Bool
+
+pub fn accessor_layout(GltfDocument, Int) -> AccessorLayout
+
+pub fn accessor_max_value(GltfAccessor, Int) -> Double?
+
+pub fn accessor_min_value(GltfAccessor, Int) -> Double?
+
+pub fn all_mesh_cost_reports(GltfDocument) -> Array[MeshCostReport]
+
+pub fn analyze_optimization(GltfDocument) -> OptimizationReport
+
+pub fn bounds_center(Bounds3) -> Vec3
+
+pub fn bounds_empty() -> Bounds3
+
+pub fn bounds_extent(Bounds3) -> Vec3
+
+pub fn bounds_include(Bounds3, Vec3) -> Bounds3
+
+pub fn bounds_surface_area(Bounds3) -> Double
+
+pub fn bounds_union(Bounds3, Bounds3) -> Bounds3
+
+pub fn buffer_total_declared_bytes(GltfDocument) -> Int
+
+pub fn buffer_total_view_bytes(GltfDocument) -> Int
+
+pub fn buffer_view_end(GltfBufferView) -> Int
+
+pub fn buffer_view_is_aligned(GltfBufferView) -> Bool
+
+pub fn build_asset_report(GltfDocument, DiagnosticPolicy) -> AssetReport
+
+pub fn build_default_asset_report(GltfDocument) -> AssetReport
+
+pub fn bytes_to_utf8_string(Bytes) -> String
+
+pub fn classify_uri(String) -> UriKind
+
+pub fn collect_resource_deps(GltfDocument) -> ResourceDeps
+
+pub fn color_is_valid(Color4) -> Bool
+
+pub fn component_info(ComponentType) -> ComponentInfo
+
+pub fn count_document(GltfDocument) -> AssetCounts
+
+pub fn count_interleaved_views(GltfDocument) -> Int
+
+pub fn count_sparse_like_accessors(GltfDocument) -> Int
+
+pub fn count_transformed_nodes(GltfDocument) -> Int
+
+pub fn default_diagnostic_policy() -> DiagnosticPolicy
+
+pub fn default_quality_thresholds() -> QualityThresholds
+
+pub fn diagnose(GltfDocument, DiagnosticPolicy) -> DiagnosticSummary
+
+pub fn diagnose_default(GltfDocument) -> DiagnosticSummary
+
+pub fn diagnose_strict(GltfDocument) -> DiagnosticSummary
+
+pub fn diagnostic_to_line(Diagnostic) -> String
+
+pub fn diagnostics_to_lines(DiagnosticSummary) -> Array[String]
+
+pub fn document_animation_channels(GltfDocument) -> Int
+
+pub fn document_animation_sampler_count(GltfDocument) -> Int
+
+pub fn document_buffer_uri_count(GltfDocument) -> Int
+
+pub fn document_double_sided_materials(GltfDocument) -> Int
+
+pub fn document_estimated_triangle_count(GltfDocument) -> Int
+
+pub fn document_external_uris(GltfDocument) -> Array[UriInfo]
+
+pub fn document_image_uri_count(GltfDocument) -> Int
+
+pub fn document_indexed_primitive_ratio(GltfDocument) -> Double
+
+pub fn document_material_parameter_errors(GltfDocument) -> Int
+
+pub fn document_materials_with_alpha(GltfDocument) -> Int
+
+pub fn document_named_mesh_count(GltfDocument) -> Int
+
+pub fn document_named_node_count(GltfDocument) -> Int
+
+pub fn document_skinned_nodes(GltfDocument) -> Int
+
+pub fn document_texture_slot_count(GltfDocument) -> Int
+
+pub fn document_total_mesh_primitives(GltfDocument) -> Int
+
+pub fn document_total_vertex_attributes(GltfDocument) -> Int
+
+pub fn document_unsafe_uri_count(GltfDocument) -> Int
+
+pub fn document_uri_count(GltfDocument) -> Int
+
+pub fn evaluate_scene_transforms(GltfDocument) -> TransformReport
+
+pub fn extract_animation_metadata(GltfDocument) -> Array[AnimationMetadata]
+
+pub fn extract_mesh_metadata(GltfDocument) -> Array[MeshMetadata]
+
+pub fn identity_mat4() -> Mat4
+
+pub fn inspect_uri(String) -> UriInfo
+
+pub fn instanced_mesh_indices(GltfDocument) -> Array[Int]
+
+pub fn mat4_from_trs(Vec3, Quat, Vec3) -> Mat4
+
+pub fn mat4_mul(Mat4, Mat4) -> Mat4
+
+pub fn mat4_transform_point(Mat4, Vec3) -> Vec3
+
+pub fn material_alpha_cutoff_is_valid(GltfMaterial) -> Bool
+
+pub fn material_pbr_is_valid(GltfMaterial) -> Bool
+
+pub fn material_texture_count(GltfMaterial) -> Int
+
+pub fn material_usage_counts(GltfDocument) -> Array[Int]
+
+pub fn mesh_attribute_signatures(GltfDocument, Int) -> Array[String]
+
+pub fn mesh_cost_report(GltfDocument, Int) -> MeshCostReport
+
+pub fn mesh_draw_call_budget(GltfDocument, Int) -> Array[Int]
+
+pub fn mesh_estimated_triangle_count(GltfDocument, GltfMesh) -> Int
+
+pub fn mesh_instance_count(GltfDocument, Int) -> Int
+
+pub fn mesh_uses_skin(GltfDocument, Int) -> Bool
+
+pub fn mesh_with_most_triangles(GltfDocument) -> Int?
+
+pub fn mesh_with_most_vertices(GltfDocument) -> Int?
+
+pub fn missing_normal_primitive_count(GltfDocument) -> Int
+
+pub fn mobile_quality_thresholds() -> QualityThresholds
+
+pub fn node_has_nontrivial_transform(GltfNode) -> Bool
+
+pub fn node_local_transform(GltfNode) -> Mat4
+
+pub fn normalize_relative_uri(String) -> String
+
+pub fn parse_gltf_object(Map[String, Json]) -> GltfDocument raise ParseError
+
+pub fn parse_gltf_string(String) -> GltfDocument raise ParseError
+
+pub fn primitive_attribute_signature(GltfPrimitive) -> String
+
+pub fn primitive_estimated_triangle_count(GltfDocument, GltfPrimitive) -> Int
+
+pub fn primitive_index_count(GltfDocument, GltfPrimitive) -> Int
+
+pub fn primitive_is_indexed(GltfPrimitive) -> Bool
+
+pub fn primitive_report(GltfDocument, Int, Int) -> PrimitiveReport
+
+pub fn primitive_topology_name(PrimitiveMode) -> String
+
+pub fn primitive_uses_material(GltfDocument, Int, Int, Int) -> Bool
+
+pub fn primitive_vertex_count(GltfDocument, GltfPrimitive) -> Int
+
+pub fn quality_gate(AssetReport, QualityThresholds) -> QualityGate
+
+pub fn quality_gate_default(AssetReport) -> QualityGate
+
+pub fn quality_gate_mobile(AssetReport) -> QualityGate
+
+pub fn quality_violation_lines(QualityGate) -> Array[String]
+
+pub fn quat(Double, Double, Double, Double) -> Quat
+
+pub fn report_geometry(GltfDocument) -> GeometryReport
+
+pub fn report_has_errors(AssetReport) -> Bool
+
+pub fn report_is_acceptable(AssetReport) -> Bool
+
+pub fn report_resources(GltfDocument) -> ResourceReport
+
+pub fn report_summary_lines(AssetReport) -> Array[String]
+
+pub fn report_to_json(AssetReport) -> String
+
+pub fn scene_cycle_count(GltfDocument) -> Int
+
+pub fn scene_root_count(GltfDocument) -> Int
+
+pub fn scene_transform_depth(GltfDocument) -> Int
+
+pub fn skinned_primitive_count(GltfDocument) -> Int
+
+pub fn strict_diagnostic_policy() -> DiagnosticPolicy
+
+pub fn total_attribute_slots(GltfDocument) -> Int
+
+pub fn total_estimated_vertex_bytes(GltfDocument) -> Int
+
+pub fn transformed_node_bounds(Bounds3, Mat4) -> Bounds3
+
+pub fn traverse_node_tree(GltfDocument) -> NodeTreeInfo
+
+pub fn unindexed_mesh_count(GltfDocument) -> Int
+
+pub fn unpack_glb(Bytes) -> GlbData raise ParseError
+
+pub fn uri_data_media_type(String) -> String?
+
+pub fn uri_extension(String) -> String?
+
+pub fn uri_is_base64(String) -> Bool
+
+pub fn uri_is_buffer(String) -> Bool
+
+pub fn uri_is_image(String) -> Bool
+
+pub fn uri_is_safe_external(String) -> Bool
+
+pub fn uri_scheme(String) -> String?
+
+pub fn validate_accessor_layouts(GltfDocument) -> Array[LayoutIssue]
+
+pub fn validate_document(GltfDocument) -> ValidationReport
+
+pub fn vec2(Double, Double) -> Vec2
+
+pub fn vec2_add(Vec2, Vec2) -> Vec2
+
+pub fn vec2_dot(Vec2, Vec2) -> Double
+
+pub fn vec2_length_squared(Vec2) -> Double
+
+pub fn vec2_scale(Vec2, Double) -> Vec2
+
+pub fn vec2_sub(Vec2, Vec2) -> Vec2
+
+pub fn vec3(Double, Double, Double) -> Vec3
+
+pub fn vec3_add(Vec3, Vec3) -> Vec3
+
+pub fn vec3_cross(Vec3, Vec3) -> Vec3
+
+pub fn vec3_dot(Vec3, Vec3) -> Double
+
+pub fn vec3_length_squared(Vec3) -> Double
+
+pub fn vec3_max(Vec3, Vec3) -> Vec3
+
+pub fn vec3_min(Vec3, Vec3) -> Vec3
+
+pub fn vec3_scale(Vec3, Double) -> Vec3
+
+pub fn vec3_sub(Vec3, Vec3) -> Vec3
+
+pub fn world_transform_for(TransformReport, Int) -> Mat4?
+
+// Errors
+pub(all) suberror ParseError {
+  InvalidJson(msg~ : String)
+  MissingField(field~ : String)
+  InvalidFieldType(field~ : String, expected~ : String)
+  UnknownEnum(field~ : String, value~ : String)
+  InvalidGlbMagic
+  UnsupportedGlbVersion(version~ : Int)
+  OutOfRange(msg~ : String)
+} derive(Eq, @debug.Debug)
+pub impl Show for ParseError
+
+// Types and methods
+pub(all) struct AccessorLayout {
+  accessor_index : Int
+  component : ComponentInfo
+  component_count : Int
+  element_size : Int
+  stride : Int
+  first_byte : Int
+  last_byte_exclusive : Int
+  valid : Bool
+  problems : Array[String]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum AccessorType {
+  Scalar
+  Vec2
+  Vec3
+  Vec4
+  Mat2
+  Mat3
+  Mat4
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum AlphaMode {
+  Opaque
+  Mask
+  Blend
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct AnimationChannel {
+  sampler : Int
+  target : AnimationTarget
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct AnimationMetadata {
+  name : String?
+  channel_count : Int
+  target_nodes : Array[Int]
+  target_paths : Array[String]
+  interpolations : Array[String]
+} derive(ToJson, @debug.Debug)
+
+pub(all) enum AnimationPath {
+  Translation
+  Rotation
+  Scale
+  Weights
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct AnimationSampler {
+  input : Int
+  output : Int
+  interpolation : Interpolation
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct AnimationTarget {
+  node : Int?
+  path : AnimationPath
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct AssetCounts {
+  scenes : Int
+  nodes : Int
+  meshes : Int
+  primitives : Int
+  materials : Int
+  textures : Int
+  images : Int
+  buffers : Int
+  buffer_views : Int
+  accessors : Int
+  animations : Int
+  skins : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct AssetReport {
+  version : String
+  generator : String?
+  counts : AssetCounts
+  geometry : GeometryReport
+  resources : ResourceReport
+  scene : NodeTreeInfo
+  transforms : TransformReport
+  diagnostics : DiagnosticSummary
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct Bounds3 {
+  min : Vec3
+  max : Vec3
+  valid : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct Color4 {
+  r : Double
+  g : Double
+  b : Double
+  a : Double
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct ComponentInfo {
+  name : String
+  size : Int
+  signed : Bool
+  floating : Bool
+  normalized_range : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum ComponentType {
+  Byte
+  UnsignedByte
+  Short
+  UnsignedShort
+  UnsignedInt
+  Float
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct Diagnostic {
+  severity : DiagnosticSeverity
+  code : DiagnosticCode
+  path : String
+  message : String
+  hint : String?
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum DiagnosticCode {
+  EmptyDocument
+  InvalidVersion
+  MissingDefaultScene
+  InvalidReference
+  InvalidAccessorLayout
+  UnindexedGeometry
+  MissingPosition
+  MissingMaterial
+  UnusedResource
+  DeepScene
+  LargeBuffer
+  ExternalDependency
+  AnimationReference
+  SkinReference
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct DiagnosticPolicy {
+  fail_on_warning : Bool
+  max_scene_depth : Int
+  max_buffer_bytes : Int
+  require_default_scene : Bool
+  require_position_attribute : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum DiagnosticSeverity {
+  Info
+  Warning
+  Error
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct DiagnosticSummary {
+  infos : Int
+  warnings : Int
+  errors : Int
+  diagnostics : Array[Diagnostic]
+  passed : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum FilterMode {
+  Nearest
+  Linear
+  NearestMipmapNearest
+  LinearMipmapNearest
+  NearestMipmapLinear
+  LinearMipmapLinear
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GeometryReport {
+  vertices : Int
+  triangles : Int
+  draw_calls : Int
+  indexed_primitives : Int
+  unindexed_primitives : Int
+  transformed_nodes : Int
+  indexed_ratio : Double
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GlbData {
+  json_str : String
+  bin_buffer : Bytes?
+} derive(ToJson, @debug.Debug)
+
+pub(all) struct GltfAccessor {
+  name : String?
+  buffer_view : Int?
+  byte_offset : Int
+  component_type : ComponentType
+  normalized : Bool
+  count : Int
+  accessor_type : AccessorType
+  max_values : Array[Double]
+  min_values : Array[Double]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GltfAnimation {
+  name : String?
+  channels : Array[AnimationChannel]
+  samplers : Array[AnimationSampler]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GltfBuffer {
+  name : String?
+  byte_length : Int
+  uri : String?
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GltfBufferView {
+  name : String?
+  buffer : Int
+  byte_offset : Int
+  byte_length : Int
+  target : Int?
+  byte_stride : Int?
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GltfDocument {
+  version : String
+  generator : String?
+  copyright : String?
+  scenes : Array[GltfScene]
+  nodes : Array[GltfNode]
+  meshes : Array[GltfMesh]
+  materials : Array[GltfMaterial]
+  textures : Array[GltfTexture]
+  images : Array[GltfImage]
+  samplers : Array[GltfSampler]
+  accessors : Array[GltfAccessor]
+  buffer_views : Array[GltfBufferView]
+  buffers : Array[GltfBuffer]
+  animations : Array[GltfAnimation]
+  skins : Array[GltfSkin]
+  default_scene : Int?
+} derive(ToJson, @debug.Debug)
+
+pub(all) struct GltfImage {
+  name : String?
+  uri : String?
+  mime_type : String?
+  buffer_view : Int?
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GltfMaterial {
+  name : String?
+  pbr_metallic_roughness : PbrMetallicRoughness
+  normal_texture : TextureInfo?
+  occlusion_texture : TextureInfo?
+  emissive_texture : TextureInfo?
+  emissive_factor : Vec3
+  alpha_mode : AlphaMode
+  alpha_cutoff : Double
+  double_sided : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GltfMesh {
+  name : String?
+  primitives : Array[GltfPrimitive]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GltfNode {
+  name : String?
+  children : Array[Int]
+  mesh : Int?
+  skin : Int?
+  camera : Int?
+  translation : Vec3?
+  rotation : Quat?
+  scale : Vec3?
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GltfPrimitive {
+  attributes : Map[String, Int]
+  indices : Int?
+  material : Int?
+  mode : PrimitiveMode
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GltfSampler {
+  name : String?
+  mag_filter : FilterMode?
+  min_filter : FilterMode?
+  wrap_s : WrapMode
+  wrap_t : WrapMode
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GltfScene {
+  name : String?
+  nodes : Array[Int]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GltfSkin {
+  name : String?
+  skeleton : Int?
+  joints : Array[Int]
+  inverse_bind_matrices : Int?
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GltfTexture {
+  name : String?
+  sampler : Int?
+  source : Int?
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum Interpolation {
+  Linear
+  Step
+  CubicSpline
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct LayoutIssue {
+  accessor : Int
+  message : String
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct Mat4 {
+  values : Array[Double]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct MeshCostReport {
+  mesh : Int
+  name : String?
+  primitives : Array[PrimitiveReport]
+  vertex_count : Int
+  triangle_count : Int
+  draw_calls : Int
+  attribute_slots : Int
+  estimated_vertex_bytes : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct MeshMetadata {
+  name : String?
+  primitive_count : Int
+  attributes : Array[String]
+  material_indices : Array[Int]
+  has_indices : Bool
+  vertex_count : Int
+} derive(ToJson, @debug.Debug)
+
+pub(all) struct NodeTreeInfo {
+  total_nodes : Int
+  max_depth : Int
+  mesh_node_count : Int
+  skinned_node_count : Int
+  root_nodes : Array[Int]
+  node_depths : Map[Int, Int]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct OptimizationReport {
+  total_vertices : Int
+  draw_calls : Int
+  unused_materials : Array[Int]
+  unused_textures : Array[Int]
+  unused_images : Array[Int]
+  suggestions : Array[String]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct PbrMetallicRoughness {
+  base_color_factor : Color4
+  base_color_texture : TextureInfo?
+  metallic_factor : Double
+  roughness_factor : Double
+  metallic_roughness_texture : TextureInfo?
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum PrimitiveMode {
+  Points
+  Lines
+  LineLoop
+  LineStrip
+  Triangles
+  TriangleStrip
+  TriangleFan
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct PrimitiveReport {
+  mesh : Int
+  primitive : Int
+  mode : String
+  vertex_count : Int
+  index_count : Int
+  triangle_count : Int
+  attribute_count : Int
+  attribute_names : Array[String]
+  indexed : Bool
+  material : Int?
+  has_position : Bool
+  has_normal : Bool
+  has_tangent : Bool
+  has_texcoord0 : Bool
+  has_color0 : Bool
+  has_joints0 : Bool
+  has_weights0 : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct QualityGate {
+  passed : Bool
+  violations : Array[QualityViolation]
+  score : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct QualityThresholds {
+  max_draw_calls : Int
+  max_vertices : Int
+  max_triangles : Int
+  min_indexed_ratio : Double
+  max_external_uris : Int
+  max_depth : Int
+  max_errors : Int
+  max_warnings : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct QualityViolation {
+  rule : String
+  actual : String
+  expected : String
+  severity : DiagnosticSeverity
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct Quat {
+  x : Double
+  y : Double
+  z : Double
+  w : Double
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct ResourceDeps {
+  external_uris : Array[String]
+  embedded_buffer_count : Int
+  embedded_image_count : Int
+  total_buffer_bytes : Int
+  texture_image_refs : Array[Int]
+} derive(ToJson, @debug.Debug)
+
+pub(all) struct ResourceReport {
+  declared_buffer_bytes : Int
+  view_bytes : Int
+  external_uri_count : Int
+  embedded_buffer_count : Int
+  embedded_image_count : Int
+  interleaved_view_count : Int
+  sparse_like_accessor_count : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct TextureInfo {
+  index : Int
+  tex_coord : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct TransformReport {
+  transforms : Array[WorldTransform]
+  roots : Array[Int]
+  max_depth : Int
+  cycle_nodes : Array[Int]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct UriInfo {
+  value : String
+  kind : UriKind
+  scheme : String?
+  media_type : String?
+  encoded : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum UriKind {
+  Data
+  Relative
+  Absolute
+  Fragment
+  Empty
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct ValidationError {
+  path : String
+  message : String
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct ValidationReport {
+  is_valid : Bool
+  errors : Array[ValidationError]
+  warnings : Array[ValidationError]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct Vec2 {
+  x : Double
+  y : Double
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct Vec3 {
+  x : Double
+  y : Double
+  z : Double
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct WorldTransform {
+  node : Int
+  parent : Int?
+  local_matrix : Mat4
+  world : Mat4
+  depth : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum WrapMode {
+  ClampToEdge
+  MirroredRepeat
+  Repeat
+} derive(Eq, ToJson, @debug.Debug)
+
+// Type aliases
+
+// Traits

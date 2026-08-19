@@ -1,4 +1,4 @@
-name: Check and Test
+name: MoonBit Check, Build and Test
 
 on:
   push:
@@ -17,6 +17,11 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
       - uses: actions/checkout@v4
+
+      - name: setup-node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
 
       - name: install-ubuntu
         if: ${{ matrix.os == 'ubuntu-latest' }}
@@ -43,14 +48,24 @@ jobs:
           moon version --all
           moon update
 
+      - name: check-all-targets
+        run: |
+          moon check --target all --deny-warn
+
+      - name: build-native
+        run: |
+          moon build --target native --deny-warn
+
       - name: check-formatting
         run: |
-          moon fmt --deny-warn
+          moon fmt
+          git diff --exit-code
 
       - name: generate-and-check-info
         run: |
-          moon info --deny-warn
+          moon info
+          git diff --exit-code
 
       - name: run-all-tests
         run: |
-          moon test
+          moon test --target all --deny-warn
