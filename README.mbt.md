@@ -162,16 +162,16 @@ Use --json when another tool should consume the complete AssetReport.
 │   ├── uri.mbt              # URI classification and safety checks
 │   ├── binary_reader.mbt    # bounded reads and accessor decoding
 │   ├── binary_writer.mbt    # aligned GLB construction and inspection
-│   ├── geometry_pipeline.mbt# geometry metrics and budget checks
-│   ├── topology_analysis.mbt# manifold, boundary, and component analysis
+│   ├── geometry_pipeline.mbt # geometry metrics and budget checks
+│   ├── topology_analysis.mbt # manifold, boundary, and component analysis
 │   ├── meshlet_pipeline.mbt # bounded meshlet and LOD planning
 │   ├── cache_optimizer.mbt  # vertex-cache metrics and reordering
 │   ├── spatial_query.mbt    # bounds, ray, frustum, and nearest queries
-│   ├── instance_batching.mbt# transform and draw-batch planning
+│   ├── instance_batching.mbt # transform and draw-batch planning
 │   ├── streaming_scheduler.mbt # progressive resource scheduling
 │   ├── semantic_validation.mbt # policy-driven semantic validation
-│   ├── resource_pipeline.mbt# resource manifests and package plans
-│   ├── animation_pipeline.mbt# track sampling and clip budgets
+│   ├── resource_pipeline.mbt # resource manifests and package plans
+│   ├── animation_pipeline.mbt # track sampling and clip budgets
 │   ├── skin_pipeline.mbt    # joint and weight analysis
 │   └── report_formats.mbt   # JSON, Markdown, and CI annotations
 ├── cmd/main/main.mbt        # native command-line entry point
