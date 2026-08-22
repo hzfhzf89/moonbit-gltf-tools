@@ -19,6 +19,9 @@ The project currently focuses on:
 - glTF 2.0 JSON documents and GLB containers;
 - structural validation and actionable diagnostics;
 - scene graph, transform, resource, accessor, and mesh analysis;
+- binary accessor decoding, GLB writing, semantic validation, and extension audits;
+- topology quality, meshlet planning, vertex-cache analysis, spatial queries,
+  instancing, and progressive resource streaming;
 - machine-readable reports for automation;
 - a native CLI for local inspection and CI integration.
 
@@ -50,6 +53,8 @@ The project currently focuses on:
   animation channels, and skinning information.
 - Audit embedded and external resource dependencies.
 - Apply configurable quality gates for general and mobile-oriented pipelines.
+- Build deterministic optimization plans for geometry, materials, resources,
+  animation, skinning, and runtime budgets.
 
 ### Reporting
 
@@ -153,7 +158,21 @@ Use --json when another tool should consume the complete AssetReport.
 │   ├── analyzer.mbt         # optimization suggestions
 │   ├── report.mbt           # unified asset reports
 │   ├── quality.mbt          # quality gates
-│   └── uri.mbt              # URI classification and safety checks
+│   ├── uri.mbt              # URI classification and safety checks
+│   ├── binary_reader.mbt    # bounded reads and accessor decoding
+│   ├── binary_writer.mbt    # aligned GLB construction and inspection
+│   ├── geometry_pipeline.mbt# geometry metrics and budget checks
+│   ├── topology_analysis.mbt# manifold, boundary, and component analysis
+│   ├── meshlet_pipeline.mbt # bounded meshlet and LOD planning
+│   ├── cache_optimizer.mbt  # vertex-cache metrics and reordering
+│   ├── spatial_query.mbt    # bounds, ray, frustum, and nearest queries
+│   ├── instance_batching.mbt# transform and draw-batch planning
+│   ├── streaming_scheduler.mbt # progressive resource scheduling
+│   ├── semantic_validation.mbt # policy-driven semantic validation
+│   ├── resource_pipeline.mbt# resource manifests and package plans
+│   ├── animation_pipeline.mbt# track sampling and clip budgets
+│   ├── skin_pipeline.mbt    # joint and weight analysis
+│   └── report_formats.mbt   # JSON, Markdown, and CI annotations
 ├── cmd/main/main.mbt        # native command-line entry point
 ├── benchmarks/              # deterministic benchmark fixtures
 └── .github/workflows/       # cross-platform CI
@@ -172,9 +191,9 @@ The benchmark protocol and recorded local baseline are maintained in
 moon run --target native cmd/main benchmarks/minimal.gltf --json
 ~~~~
 
-Recorded local baseline (2026-08-18): on Windows PowerShell with the native
-backend, five end-to-end samples were 1739.72, 316.77, 309.28, 386.85, and
-312.15 ms; the median was 316.77 ms. The first sample included native
+Recorded local baseline (2026-08-19): on Windows PowerShell with the native
+backend, five end-to-end samples were 1620.83, 269.31, 273.66, 270.56, and
+276.35 ms; the median was 273.66 ms. The first sample included native
 build/cache warm-up. The fixture contains one scene and one node, and the JSON
 report contains zero diagnostics. These figures are host-dependent.
 

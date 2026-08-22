@@ -8,9 +8,19 @@ import {
 // Values
 pub fn accessor_alignment(ComponentType) -> Int
 
+pub fn accessor_audit(GltfDocument, Int, BufferLayoutPolicy) -> AccessorAudit
+
+pub fn accessor_buffer_index(GltfDocument, Int) -> Int?
+
+pub fn accessor_byte_range(GltfDocument, Int) -> BinaryRange?
+
 pub fn accessor_component_count(AccessorType) -> Int
 
+pub fn accessor_data_density(GltfDocument, Int) -> Double
+
 pub fn accessor_element_size(GltfAccessor) -> Int
+
+pub fn accessor_is_contiguous(GltfDocument, Int) -> Bool
 
 pub fn accessor_is_index_compatible(GltfAccessor) -> Bool
 
@@ -20,11 +30,185 @@ pub fn accessor_max_value(GltfAccessor, Int) -> Double?
 
 pub fn accessor_min_value(GltfAccessor, Int) -> Double?
 
+pub fn accessor_padding_bytes(GltfDocument, Int) -> Int
+
+pub fn accessor_payload_bytes(GltfDocument, Int) -> Int
+
+pub fn all_accessor_audits(GltfDocument, BufferLayoutPolicy) -> Array[AccessorAudit]
+
+pub fn all_animation_clip_reports(GltfDocument, BinaryAsset) -> Array[AnimationClipReport]
+
+pub fn all_animation_tracks(GltfDocument, BinaryAsset) -> Array[AnimationTrack]
+
+pub fn all_buffer_audits(GltfDocument, BufferLayoutPolicy) -> Array[BufferAudit]
+
+pub fn all_buffer_view_relations(GltfDocument) -> Array[BufferViewRelation]
+
+pub fn all_material_reports(GltfDocument) -> Array[MaterialReport]
+
 pub fn all_mesh_cost_reports(GltfDocument) -> Array[MeshCostReport]
+
+pub fn all_mesh_geometry_reports(GltfDocument, BinaryAsset) -> Array[MeshGeometryReport]
+
+pub fn all_reachable_scene_nodes(GltfDocument) -> Array[Int]
+
+pub fn all_skin_reports(GltfDocument, BinaryAsset) -> Array[SkinReport]
+
+pub fn all_texture_reports(GltfDocument) -> Array[TextureReport]
+
+pub fn alpha_mode_name(AlphaMode) -> String
 
 pub fn analyze_optimization(GltfDocument) -> OptimizationReport
 
+pub fn animation_budget_result(GltfDocument, Array[AnimationClipReport], AnimationBudget) -> AnimationBudgetResult
+
+pub fn animation_clip_report(GltfDocument, BinaryAsset, Int) -> AnimationClipReport
+
+pub fn animation_compress_track(AnimationTrack, AnimationCompressionPolicy) -> AnimationCompressedTrack
+
+pub fn animation_compress_tracks(Array[AnimationTrack], AnimationCompressionPolicy) -> Array[AnimationCompressedTrack]
+
+pub fn animation_compressed_duration(AnimationCompressedTrack) -> Double
+
+pub fn animation_compressed_expand(AnimationCompressedTrack, Int) -> Array[Double]
+
+pub fn animation_compressed_monotonic(AnimationCompressedTrack) -> Bool
+
+pub fn animation_compressed_value(AnimationCompressedTrack, Int, Int) -> Double
+
+pub fn animation_compression_lines(AnimationCompressionStats) -> Array[String]
+
+pub fn animation_compression_mode_name(AnimationCompressionMode) -> String
+
+pub fn animation_compression_total(Array[AnimationCompressedTrack]) -> AnimationCompressionStats
+
+pub fn animation_duration_from_times(Array[Double]) -> Double
+
+pub fn animation_key_error(Array[Double], Array[Double], Int, Int) -> Double
+
+pub fn animation_linear_value(Array[Double], Array[Double], Int, Double, Int, Int) -> Double
+
+pub fn animation_path_name(AnimationPath) -> String
+
+pub fn animation_playback_time(Double, Double, AnimationPlaybackMode) -> (Double, Bool)
+
+pub fn animation_pose(GltfDocument, BinaryAsset, Int, Double, AnimationPlaybackMode) -> AnimationPose
+
+pub fn animation_quantize(Double, AnimationCompressionMode) -> Double
+
+pub fn animation_reducible_keys(Array[Double], Array[Double], Int, Double, Int) -> Array[Bool]
+
+pub fn animation_report_summary_lines(Array[AnimationClipReport]) -> Array[String]
+
+pub fn animation_time_end(Array[Double]) -> Double
+
+pub fn animation_time_start(Array[Double]) -> Double
+
+pub fn animation_times_are_monotonic(Array[Double]) -> Bool
+
+pub fn animation_times_are_strict(Array[Double]) -> Bool
+
+pub fn animation_track(GltfDocument, BinaryAsset, Int, Int) -> AnimationTrack
+
+pub fn animation_track_duration(AnimationTrack) -> Double
+
+pub fn animation_track_find_interval(AnimationTrack, Double) -> (Int, Int, Double)
+
+pub fn animation_track_is_rotation(AnimationTrack) -> Bool
+
+pub fn animation_track_is_transform(AnimationTrack) -> Bool
+
+pub fn animation_track_is_valid(AnimationTrack) -> Bool
+
+pub fn animation_track_key_count(AnimationTrack) -> Int
+
+pub fn animation_track_value(AnimationTrack, Int) -> Array[Double]
+
+pub fn animation_tracks(GltfDocument, BinaryAsset, Int) -> Array[AnimationTrack]
+
+pub fn animation_value_at(Array[Double], Int, Int, Int) -> Double
+
+pub fn animation_value_width(AnimationPath) -> Int
+
+pub fn attribute_count_map(Map[String, Int], Array[GltfAccessor]) -> Map[String, Int]
+
+pub fn attribute_issue(String, AttributeValidationSeverity, String, String, Int?) -> AttributeValidationIssue
+
+pub fn attribute_issue_codes(AttributeValidationReport) -> Array[String]
+
+pub fn attribute_issues_for_name(AttributeValidationReport, String) -> Array[AttributeValidationIssue]
+
+pub fn attribute_name_is_finite(String) -> Bool
+
+pub fn attribute_name_is_known(String) -> Bool
+
+pub fn attribute_name_is_texcoord(String) -> Bool
+
+pub fn attribute_name_set(String) -> Int?
+
+pub fn attribute_names_sorted(Map[String, Int]) -> Array[String]
+
+pub fn attribute_report_has_code(AttributeValidationReport, String) -> Bool
+
+pub fn attribute_report_lines(AttributeValidationReport) -> Array[String]
+
+pub fn attribute_report_merge(AttributeValidationReport, AttributeValidationReport) -> AttributeValidationReport
+
+pub fn attribute_validation_for_primitive(GltfPrimitive, Array[GltfAccessor], AttributeValidationPolicy) -> AttributeValidationReport
+
+pub fn attribute_validation_report(Map[String, Int], Array[GltfAccessor], AttributeValidationPolicy) -> AttributeValidationReport
+
+pub fn attribute_validation_severity_name(AttributeValidationSeverity) -> String
+
+pub fn binary_asset(Array[BinaryBuffer]) -> BinaryAsset
+
+pub fn binary_asset_declared_bytes(BinaryAsset) -> Int
+
+pub fn binary_asset_empty() -> BinaryAsset
+
+pub fn binary_asset_for_document(GltfDocument, Array[Bytes]) -> BinaryAsset
+
+pub fn binary_asset_for_glb(GltfDocument, Array[Bytes], Bytes) -> BinaryAsset
+
+pub fn binary_asset_loaded_bytes(BinaryAsset) -> Int
+
+pub fn binary_asset_missing_count(BinaryAsset) -> Int
+
+pub fn binary_asset_validate(GltfDocument, BinaryAsset) -> Array[String]
+
+pub fn binary_asset_with_glb(Array[BinaryBuffer], Bytes) -> BinaryAsset
+
+pub fn binary_buffer(Bytes, declared_length~ : Int, source~ : BufferSource) -> BinaryBuffer
+
+pub fn binary_buffer_complete(BinaryAsset, Int) -> Bool
+
+pub fn binary_buffer_count(BinaryAsset) -> Int
+
+pub fn binary_buffer_declared_length(BinaryAsset, Int) -> Int
+
+pub fn binary_buffer_length(BinaryAsset, Int) -> Int
+
+pub fn binary_buffer_source(BinaryAsset, Int) -> BufferSource
+
+pub fn binary_checksum(Bytes) -> UInt
+
+pub fn binary_checksum_range(Bytes, Int, Int) -> UInt raise BinaryError
+
+pub fn binary_compare_ranges(Bytes, Int, Bytes, Int, Int) -> Bool
+
+pub fn binary_range(Int, Int) -> BinaryRange
+
+pub fn binary_range_is_valid(Bytes, BinaryRange) -> Bool
+
 pub fn bounds_center(Bounds3) -> Vec3
+
+pub fn bounds_contains_bounds(Bounds3, Bounds3) -> Bool
+
+pub fn bounds_contains_point(Bounds3, Vec3) -> Bool
+
+pub fn bounds_diagonal_length(Bounds3) -> Double
+
+pub fn bounds_distance_to_point(Bounds3, Vec3) -> Double
 
 pub fn bounds_empty() -> Bounds3
 
@@ -36,19 +220,129 @@ pub fn bounds_surface_area(Bounds3) -> Double
 
 pub fn bounds_union(Bounds3, Bounds3) -> Bounds3
 
+pub fn bounds_volume(Bounds3) -> Double
+
+pub fn buffer_audit(GltfDocument, Int, BufferLayoutPolicy) -> BufferAudit
+
+pub fn buffer_layout_efficiency(BufferLayoutReport) -> Double
+
+pub fn buffer_layout_has_overlap(BufferLayoutReport) -> Bool
+
+pub fn buffer_layout_has_padding(BufferLayoutReport) -> Bool
+
+pub fn buffer_layout_report(GltfDocument, BufferLayoutPolicy) -> BufferLayoutReport
+
+pub fn buffer_layout_summary_lines(BufferLayoutReport) -> Array[String]
+
+pub fn buffer_overlap_bytes(BinaryRange, BinaryRange) -> Int
+
+pub fn buffer_range_end(BinaryRange) -> Int
+
+pub fn buffer_ranges_adjacent(BinaryRange, BinaryRange) -> Bool
+
+pub fn buffer_ranges_overlap(BinaryRange, BinaryRange) -> Bool
+
+pub fn buffer_reference_counts(GltfDocument) -> Array[Int]
+
 pub fn buffer_total_declared_bytes(GltfDocument) -> Int
 
 pub fn buffer_total_view_bytes(GltfDocument) -> Int
+
+pub fn buffer_view_accessor_indices(GltfDocument, Int) -> Array[Int]
+
+pub fn buffer_view_buffer_indices(GltfDocument) -> Array[Array[Int]]
 
 pub fn buffer_view_end(GltfBufferView) -> Int
 
 pub fn buffer_view_is_aligned(GltfBufferView) -> Bool
 
+pub fn buffer_view_padding_bytes(GltfDocument, Int) -> Int
+
+pub fn buffer_view_payload_bytes(GltfDocument, Int) -> Int
+
+pub fn buffer_view_range(GltfDocument, Int) -> BinaryRange?
+
+pub fn buffer_view_reference_counts(GltfDocument) -> Array[Int]
+
+pub fn buffer_view_relation(GltfDocument, Int, Int) -> BufferViewRelation
+
 pub fn build_asset_report(GltfDocument, DiagnosticPolicy) -> AssetReport
 
 pub fn build_default_asset_report(GltfDocument) -> AssetReport
 
+pub fn build_default_production_profile(GltfDocument, BinaryAsset) -> ProductionProfile
+
+pub fn build_glb(String, Bytes, options? : GlbBuildOptions) -> Bytes raise BinaryWriteError
+
+pub fn build_glb_report(String, Bytes, options? : GlbBuildOptions) -> GlbBuildReport
+
+pub fn build_mobile_production_profile(GltfDocument, BinaryAsset) -> ProductionProfile
+
+pub fn build_production_profile(GltfDocument, BinaryAsset, ProductionPolicy) -> ProductionProfile
+
+pub fn build_stream_chunks(ProductionProfile, Int) -> Array[StreamChunk]
+
 pub fn bytes_to_utf8_string(Bytes) -> String
+
+pub fn cache_best_candidate(Array[CacheCandidateScore]) -> CacheCandidateScore?
+
+pub fn cache_budget_result(CacheMetrics, CacheBudget) -> CacheBudgetResult
+
+pub fn cache_degenerate_triangle_count(Array[Int]) -> Int
+
+pub fn cache_duplicate_index_count(Array[Int]) -> Int
+
+pub fn cache_index_is_valid(Array[Int], Int) -> Bool
+
+pub fn cache_index_max(Array[Int]) -> Int
+
+pub fn cache_is_triangle_stream(Array[Int]) -> Bool
+
+pub fn cache_metrics_delta(CacheMetrics, CacheMetrics) -> Array[Double]
+
+pub fn cache_metrics_for_triangles(Array[TopologyTriangle], Int, Int) -> CacheMetrics
+
+pub fn cache_push_triangle(Array[Int], TopologyTriangle, Int) -> Unit
+
+pub fn cache_push_vertex(Array[Int], Int, Int) -> Unit
+
+pub fn cache_reorder_greedy(Array[Int], Int, CachePolicy) -> CacheReorderResult
+
+pub fn cache_reorder_preserving_groups(Array[Int], Int, CachePolicy, Int) -> CacheReorderResult
+
+pub fn cache_report_lines(CacheMetrics) -> Array[String]
+
+pub fn cache_result_summary(CacheReorderResult) -> Array[String]
+
+pub fn cache_simulate(Array[Int], Int, Int) -> CacheMetrics
+
+pub fn cache_triangle_at(Array[Int], Int) -> TopologyTriangle?
+
+pub fn cache_triangle_cache_hits(Array[Int], Int, Array[Int]) -> Int
+
+pub fn cache_triangle_candidates(Array[Int], Array[Bool], Array[Int]) -> Array[CacheCandidateScore]
+
+pub fn cache_triangle_count(Array[Int]) -> Int
+
+pub fn cache_triangle_has_vertex(Array[Int], Int, Int) -> Bool
+
+pub fn cache_triangle_new_vertices(Array[Int], Int, Array[Int]) -> Int
+
+pub fn cache_triangle_score(Array[Int], Int, Array[Int]) -> CacheCandidateScore
+
+pub fn cache_triangle_vertices(Array[Int], Int) -> Array[Int]
+
+pub fn cache_unique_index_count(Array[Int]) -> Int
+
+pub fn cache_validate_reorder(Array[Int], Array[Int]) -> Bool
+
+pub fn cache_vertex_count(Array[Int]) -> Int
+
+pub fn cache_vertex_reuse_ratio(Array[Int]) -> Double
+
+pub fn ci_annotation(String, String, String, String, String) -> CiAnnotation
+
+pub fn clamped_material_factor(Double) -> Double
 
 pub fn classify_uri(String) -> UriKind
 
@@ -66,9 +360,117 @@ pub fn count_sparse_like_accessors(GltfDocument) -> Int
 
 pub fn count_transformed_nodes(GltfDocument) -> Int
 
+pub fn cubic_hermite(Double, Double, Double, Double, Double, Double) -> Double
+
+pub fn decode_accessor(GltfDocument, BinaryAsset, Int) -> DecodedAccessor
+
+pub fn decode_accessor_normalized(GltfDocument, BinaryAsset, Int) -> DecodedAccessor
+
+pub fn decode_accessor_scalars(GltfDocument, BinaryAsset, Int) -> Array[Double]
+
+pub fn decode_accessor_vectors(GltfDocument, BinaryAsset, Int) -> DecodedVector
+
+pub fn decode_accessor_with_mode(GltfDocument, BinaryAsset, Int, AccessorDecodeMode) -> DecodedAccessor
+
+pub fn decode_all_accessors(GltfDocument, BinaryAsset) -> Array[DecodedAccessor]
+
+pub fn decode_index_values(GltfDocument, BinaryAsset, Int) -> Array[Int]
+
+pub fn decode_many_accessors(GltfDocument, BinaryAsset, Array[Int]) -> Array[DecodedAccessor]
+
+pub fn decode_normal_values(GltfDocument, BinaryAsset, Int) -> Array[Vec3]
+
+pub fn decode_position_values(GltfDocument, BinaryAsset, Int) -> Array[Vec3]
+
+pub fn decode_quaternion_values(GltfDocument, BinaryAsset, Int) -> Array[Quat]
+
+pub fn decode_skin_inverse_bind_matrices(GltfDocument, BinaryAsset, Int) -> Array[Mat4]
+
+pub fn decode_texcoord_values(GltfDocument, BinaryAsset, Int) -> Array[Vec2]
+
+pub fn decoded_accessor_average(DecodedAccessor) -> Double?
+
+pub fn decoded_accessor_component_bounds(DecodedAccessor, Int) -> (Double, Double)?
+
+pub fn decoded_accessor_duplicate_count(DecodedAccessor) -> Int
+
+pub fn decoded_accessor_element(DecodedAccessor, Int) -> Array[Double]
+
+pub fn decoded_accessor_has_non_finite(DecodedAccessor) -> Bool
+
+pub fn decoded_accessor_is_monotonic(DecodedAccessor) -> Bool
+
+pub fn decoded_accessor_max(DecodedAccessor) -> Double?
+
+pub fn decoded_accessor_min(DecodedAccessor) -> Double?
+
+pub fn decoded_accessor_value(DecodedAccessor, Int, Int) -> Double?
+
+pub fn default_animation_budget() -> AnimationBudget
+
+pub fn default_animation_compression_policy() -> AnimationCompressionPolicy
+
+pub fn default_asset_diff_policy() -> AssetDiffPolicy
+
+pub fn default_attribute_validation_policy() -> AttributeValidationPolicy
+
+pub fn default_buffer_layout_policy() -> BufferLayoutPolicy
+
+pub fn default_cache_budget() -> CacheBudget
+
+pub fn default_cache_policy() -> CachePolicy
+
 pub fn default_diagnostic_policy() -> DiagnosticPolicy
 
+pub fn default_extension_policy() -> ExtensionPolicy
+
+pub fn default_geometry_budget() -> GeometryBudget
+
+pub fn default_glb_build_options() -> GlbBuildOptions
+
+pub fn default_import_pipeline_policy() -> ImportPipelinePolicy
+
+pub fn default_import_stages() -> Array[ImportStage]
+
+pub fn default_instance_policy() -> InstancePolicy
+
+pub fn default_integrity_policy() -> IntegrityPolicy
+
+pub fn default_lod_plan(Int, Int) -> LodPlan
+
+pub fn default_lod_selection_policy() -> LodSelectionPolicy
+
+pub fn default_material_budget() -> MaterialBudget
+
+pub fn default_meshlet_limits() -> MeshletLimits
+
+pub fn default_normalization_policy() -> NormalizationPolicy
+
+pub fn default_optimization_policy() -> OptimizationPolicy
+
+pub fn default_production_policy() -> ProductionPolicy
+
+pub fn default_quality_gate_policy() -> QualityGatePolicy
+
 pub fn default_quality_thresholds() -> QualityThresholds
+
+pub fn default_resource_policy() -> ResourcePolicy
+
+pub fn default_runtime_budget() -> RuntimeBudget
+
+pub fn default_scene_index(GltfDocument) -> Int?
+
+pub fn default_scene_scheduler_policy() -> SceneSchedulerPolicy
+
+pub fn default_semantic_policy() -> SemanticValidationPolicy
+
+pub fn default_skin_budget() -> SkinBudget
+
+pub fn default_spatial_policy() -> SpatialPolicy
+
+pub fn default_stream_budget() -> StreamBudget
+
+pub fn default_topology_policy() -> TopologyPolicy
 
 pub fn diagnose(GltfDocument, DiagnosticPolicy) -> DiagnosticSummary
 
@@ -80,9 +482,21 @@ pub fn diagnostic_to_line(Diagnostic) -> String
 
 pub fn diagnostics_to_lines(DiagnosticSummary) -> Array[String]
 
+pub fn diff_changes(AssetDiffReport) -> Array[AssetDifference]
+
+pub fn diff_documents(GltfDocument, GltfDocument, AssetDiffPolicy) -> AssetDiffReport
+
+pub fn diff_errors(AssetDiffReport) -> Array[AssetDifference]
+
+pub fn diff_has_breaking_changes(AssetDiffReport) -> Bool
+
+pub fn diff_summary_lines(AssetDiffReport) -> Array[String]
+
 pub fn document_animation_channels(GltfDocument) -> Int
 
 pub fn document_animation_sampler_count(GltfDocument) -> Int
+
+pub fn document_buffer_resource_records(GltfDocument, ResourcePolicy) -> Array[ResourceRecord]
 
 pub fn document_buffer_uri_count(GltfDocument) -> Int
 
@@ -92,6 +506,10 @@ pub fn document_estimated_triangle_count(GltfDocument) -> Int
 
 pub fn document_external_uris(GltfDocument) -> Array[UriInfo]
 
+pub fn document_geometry_report(GltfDocument, BinaryAsset) -> DocumentGeometryReport
+
+pub fn document_image_resource_records(GltfDocument, ResourcePolicy) -> Array[ResourceRecord]
+
 pub fn document_image_uri_count(GltfDocument) -> Int
 
 pub fn document_indexed_primitive_ratio(GltfDocument) -> Double
@@ -100,9 +518,15 @@ pub fn document_material_parameter_errors(GltfDocument) -> Int
 
 pub fn document_materials_with_alpha(GltfDocument) -> Int
 
+pub fn document_meshlet_reports(GltfDocument, BinaryAsset, MeshletLimits) -> Array[MeshletBuildReport]
+
 pub fn document_named_mesh_count(GltfDocument) -> Int
 
 pub fn document_named_node_count(GltfDocument) -> Int
+
+pub fn document_resource_records(GltfDocument, ResourcePolicy) -> Array[ResourceRecord]
+
+pub fn document_scene_graph_report(GltfDocument) -> SceneGraphReport
 
 pub fn document_skinned_nodes(GltfDocument) -> Int
 
@@ -116,17 +540,359 @@ pub fn document_unsafe_uri_count(GltfDocument) -> Int
 
 pub fn document_uri_count(GltfDocument) -> Int
 
+pub fn duplicate_material_groups(GltfDocument) -> Array[Array[Int]]
+
+pub fn embedded_resource_policy() -> ResourcePolicy
+
+pub fn empty_node_selection() -> NodeSelection
+
 pub fn evaluate_scene_transforms(GltfDocument) -> TransformReport
+
+pub fn extension_audit(String, ExtensionPolicy) -> ExtensionAudit raise ParseError
+
+pub fn extension_audit_default(String) -> ExtensionAudit raise ParseError
+
+pub fn extension_audit_issues(ExtensionAudit) -> Array[String]
+
+pub fn extension_audit_summary_lines(ExtensionAudit) -> Array[String]
+
+pub fn extension_is_required(ExtensionAudit, String) -> Bool
+
+pub fn extension_is_used(ExtensionAudit, String) -> Bool
+
+pub fn extension_required_count(ExtensionAudit) -> Int
+
+pub fn extension_usage_count(ExtensionAudit) -> Int
 
 pub fn extract_animation_metadata(GltfDocument) -> Array[AnimationMetadata]
 
 pub fn extract_mesh_metadata(GltfDocument) -> Array[MeshMetadata]
 
+pub fn find_nodes_by_name(GltfDocument, String) -> Array[Int]
+
+pub fn find_nodes_by_prefix(GltfDocument, String) -> Array[Int]
+
+pub fn geometry_attribute_lines(GeometryAttributeStats) -> Array[String]
+
+pub fn geometry_attribute_stats(Array[Vec3], Array[Vec3], Array[TopologyTriangle]) -> GeometryAttributeStats
+
+pub fn geometry_barycentric(Double, Double, Double) -> GeometryBarycentric
+
+pub fn geometry_barycentric_sum(GeometryBarycentric) -> Double
+
+pub fn geometry_barycentric_valid(GeometryBarycentric, Double) -> Bool
+
+pub fn geometry_budget_result(DocumentGeometryReport, GeometryBudget) -> GeometryBudgetResult
+
+pub fn geometry_centroids(Array[Vec3], Array[TopologyTriangle]) -> Array[Vec3]
+
+pub fn geometry_cluster_area(Array[Vec3], Array[TopologyTriangle]) -> Double
+
+pub fn geometry_cluster_bounds(Array[Vec3], Array[TopologyTriangle]) -> SpatialAabb
+
+pub fn geometry_cluster_centers(GeometryClusterPlan) -> Array[Vec3]
+
+pub fn geometry_cluster_find(GeometryClusterPlan, Int) -> Int?
+
+pub fn geometry_cluster_largest(GeometryClusterPlan) -> GeometryCluster?
+
+pub fn geometry_cluster_plan(Array[Vec3], Array[TopologyTriangle], Int) -> GeometryClusterPlan
+
+pub fn geometry_degenerate_count(Array[Vec3], Array[TopologyTriangle], Double) -> Int
+
+pub fn geometry_hit_closest(Array[GeometryRayHit]) -> GeometryRayHit?
+
+pub fn geometry_hit_uv(GeometryRayHit, Vec3, Vec3, Vec3) -> Vec3
+
+pub fn geometry_interpolate_vec3(Vec3, Vec3, Vec3, GeometryBarycentric) -> Vec3
+
+pub fn geometry_make_cluster(Int, Array[Vec3], Array[TopologyTriangle]) -> GeometryCluster
+
+pub fn geometry_normal_flip_count(Array[Vec3], Array[Vec3]) -> Int
+
+pub fn geometry_normal_is_unit(Vec3, Double) -> Bool
+
+pub fn geometry_normal_is_zero(Vec3, Double) -> Bool
+
+pub fn geometry_normal_length(Vec3) -> Double
+
+pub fn geometry_normal_stats(Array[Vec3], Double) -> GeometryNormalStats
+
+pub fn geometry_normalize_all(Array[Vec3]) -> Array[Vec3]
+
+pub fn geometry_one_vec3() -> Vec3
+
+pub fn geometry_position_bounds(Array[Vec3]) -> SpatialAabb
+
+pub fn geometry_position_center(Array[Vec3]) -> Vec3
+
+pub fn geometry_position_diagonal(Array[Vec3]) -> Double
+
+pub fn geometry_position_extent(Array[Vec3]) -> Vec3
+
+pub fn geometry_position_outliers(Array[Vec3], Vec3, Double) -> Array[Int]
+
+pub fn geometry_position_radius(Array[Vec3]) -> Double
+
+pub fn geometry_position_stats(Array[Vec3]) -> GeometryPositionStats
+
+pub fn geometry_ray_triangle(SpatialRay, Vec3, Vec3, Vec3, Int, Bool) -> GeometryRayHit?
+
+pub fn geometry_raycast_mesh(SpatialRay, Array[Vec3], Array[TopologyTriangle], Bool) -> Array[GeometryRayHit]
+
+pub fn geometry_report_average_triangles_per_mesh(DocumentGeometryReport) -> Double
+
+pub fn geometry_report_average_vertices_per_triangle(DocumentGeometryReport) -> Double
+
+pub fn geometry_report_has_degenerate_triangles(DocumentGeometryReport) -> Bool
+
+pub fn geometry_report_has_invalid_indices(DocumentGeometryReport) -> Bool
+
+pub fn geometry_report_is_empty(DocumentGeometryReport) -> Bool
+
+pub fn geometry_report_largest_bounds(DocumentGeometryReport) -> Bounds3
+
+pub fn geometry_report_largest_mesh(DocumentGeometryReport) -> Int?
+
+pub fn geometry_report_lines(GeometrySamplingReport) -> Array[String]
+
+pub fn geometry_report_summary_lines(DocumentGeometryReport) -> Array[String]
+
+pub fn geometry_sampling_report(Array[Vec3], Array[TopologyTriangle], SpatialRay?) -> GeometrySamplingReport
+
+pub fn geometry_surface_stats(Array[Vec3], Array[TopologyTriangle]) -> GeometrySurfaceStats
+
+pub fn geometry_total_area(Array[Vec3], Array[TopologyTriangle]) -> Double
+
+pub fn geometry_triangle_centroid(Vec3, Vec3, Vec3) -> Vec3
+
+pub fn geometry_triangle_sample(Int, Vec3, Vec3, Vec3, Double, Double) -> GeometrySample
+
+pub fn geometry_vec3_average(Array[Vec3]) -> Vec3
+
+pub fn geometry_vec3_average_weighted(Array[Vec3], Array[Double]) -> Vec3
+
+pub fn geometry_vec3_equal(Vec3, Vec3, Double) -> Bool
+
+pub fn geometry_vec3_maximum(Array[Vec3]) -> Vec3
+
+pub fn geometry_vec3_minimum(Array[Vec3]) -> Vec3
+
+pub fn geometry_vec3_sum(Array[Vec3]) -> Vec3
+
+pub fn geometry_zero_vec3() -> Vec3
+
+pub fn glb_alignment_overhead(Bytes) -> Int
+
+pub fn glb_bin_byte_count(Bytes) -> Int
+
+pub fn glb_bin_chunk(Bytes, Byte) -> Bytes
+
+pub fn glb_binary_padding(Bytes, Byte) -> Bytes
+
+pub fn glb_chunk_bytes(UInt, Bytes) -> Bytes
+
+pub fn glb_chunk_count(Bytes) -> Int
+
+pub fn glb_chunk_infos(Bytes) -> Array[GlbChunkInfo]
+
+pub fn glb_has_bin_chunk(Bytes) -> Bool
+
+pub fn glb_has_json_chunk(Bytes) -> Bool
+
+pub fn glb_header_bytes(Int) -> Bytes
+
+pub fn glb_json_byte_count(Bytes) -> Int
+
+pub fn glb_json_chunk(String, Char) -> Bytes
+
+pub fn glb_json_padding(String, Char) -> String
+
+pub fn glb_padded_length(Int) -> Int
+
+pub fn glb_padding_length(Int) -> Int
+
+pub fn glb_report_summary_lines(GlbBuildReport) -> Array[String]
+
 pub fn identity_mat4() -> Mat4
+
+pub fn import_pipeline_failed_stages(ImportPipeline) -> Array[ImportStage]
+
+pub fn import_pipeline_from_profile(GltfDocument, ProductionProfile, ImportPipelinePolicy) -> ImportPipeline
+
+pub fn import_pipeline_has_blocker(ImportPipeline) -> Bool
+
+pub fn import_pipeline_is_complete(ImportPipeline) -> Bool
+
+pub fn import_pipeline_mark_stage(ImportPipeline, ImportStageKind, ImportStageStatus, Array[String]) -> ImportPipeline
+
+pub fn import_pipeline_pending_stages(ImportPipeline) -> Array[ImportStage]
+
+pub fn import_pipeline_progress(ImportPipeline) -> Double
+
+pub fn import_pipeline_ready_stages(ImportPipeline) -> Array[ImportStage]
+
+pub fn import_pipeline_stage(ImportPipeline, ImportStageKind) -> ImportStage?
+
+pub fn import_pipeline_stage_lines(ImportPipeline) -> Array[String]
+
+pub fn import_pipeline_summary_lines(ImportPipeline) -> Array[String]
+
+pub fn import_stage_is_success(ImportStageStatus) -> Bool
+
+pub fn import_stage_is_terminal(ImportStageStatus) -> Bool
+
+pub fn import_stage_name(ImportStageKind) -> String
+
+pub fn import_stage_status_name(ImportStageStatus) -> String
 
 pub fn inspect_uri(String) -> UriInfo
 
+pub fn instance_batch_bounds(Array[InstanceRecord], Array[Int]) -> SpatialAabb
+
+pub fn instance_batch_reduction(InstancePlan) -> Double
+
+pub fn instance_build_batches(Array[InstanceRecord], Array[Int]) -> Array[InstanceBatch]
+
+pub fn instance_build_commands(Array[InstanceBatch]) -> Array[DrawCommand]
+
+pub fn instance_key(InstanceRecord, Int) -> InstanceBatchKey
+
+pub fn instance_key_equal(InstanceBatchKey, InstanceBatchKey) -> Bool
+
+pub fn instance_lod_for_distance(Double, Array[Double], Double) -> Int
+
+pub fn instance_lod_for_screen_size(Double, Double, Array[Double]) -> Int
+
+pub fn instance_plan(Array[InstanceRecord], Array[Int]) -> InstancePlan
+
+pub fn instance_plan_cull(Array[InstanceRecord], SpatialFrustum, Int, Array[Double], Vec3) -> InstancePlan
+
+pub fn instance_plan_lines(InstancePlan) -> Array[String]
+
+pub fn instance_quaternion_multiply(Quat, Quat) -> Quat
+
+pub fn instance_quaternion_normalize(Quat) -> Quat
+
+pub fn instance_quaternion_rotate(Quat, Vec3) -> Vec3
+
+pub fn instance_record(Int, Int, Int, InstanceTransform, SpatialAabb, Int) -> InstanceRecord
+
+pub fn instance_set_lod_bias(InstanceRecord, Double) -> InstanceRecord
+
+pub fn instance_set_visible(InstanceRecord, Bool) -> InstanceRecord
+
+pub fn instance_transform(Vec3, Quat, Vec3) -> InstanceTransform
+
+pub fn instance_transform_bounds(InstanceTransform, SpatialAabb) -> SpatialAabb
+
+pub fn instance_transform_combine(InstanceTransform, InstanceTransform) -> InstanceTransform
+
+pub fn instance_transform_identity() -> InstanceTransform
+
+pub fn instance_transform_lerp(InstanceTransform, InstanceTransform, Double) -> InstanceTransform
+
+pub fn instance_transform_point(InstanceTransform, Vec3) -> Vec3
+
+pub fn instance_validate_plan(InstancePlan, InstancePolicy) -> InstanceBudgetResult
+
 pub fn instanced_mesh_indices(GltfDocument) -> Array[Int]
+
+pub fn integrity_checksum(Bytes) -> UInt
+
+pub fn integrity_checksum_range(Bytes, IntegrityRange) -> UInt?
+
+pub fn integrity_compare_records(Array[IntegrityRecord], Array[IntegrityRecord]) -> Array[String]
+
+pub fn integrity_duplicate_checksum_count(Array[IntegrityRecord]) -> Int
+
+pub fn integrity_find_range(Array[IntegrityRange], Int, Int) -> IntegrityRange?
+
+pub fn integrity_overlaps(Array[IntegrityRange]) -> Array[(IntegrityRange, IntegrityRange)]
+
+pub fn integrity_range(Int, Int, Int, UInt) -> IntegrityRange
+
+pub fn integrity_range_end(IntegrityRange) -> Int
+
+pub fn integrity_range_valid(IntegrityRange, Int) -> Bool
+
+pub fn integrity_ranges_for_buffer(Bytes, Array[IntegrityRange]) -> Array[IntegrityRange]
+
+pub fn integrity_ranges_overlap(IntegrityRange, IntegrityRange) -> Bool
+
+pub fn integrity_ranges_total(Array[IntegrityRange]) -> Int
+
+pub fn integrity_record(String, Int, UInt, UInt, Int) -> IntegrityRecord
+
+pub fn integrity_record_missing(String, Int) -> IntegrityRecord
+
+pub fn integrity_records_for_buffers(Array[Bytes], Array[UInt]) -> Array[IntegrityRecord]
+
+pub fn integrity_report(Array[IntegrityRecord], Array[IntegrityRange], IntegrityPolicy) -> IntegrityReport
+
+pub fn integrity_report_lines(IntegrityReport) -> Array[String]
+
+pub fn integrity_status_count(Array[IntegrityRecord], IntegrityStatus) -> Int
+
+pub fn integrity_status_name(IntegrityStatus) -> String
+
+pub fn interpolate_array(Array[Double], Array[Double], Double) -> Array[Double]
+
+pub fn interpolate_cubic(AnimationTrack, Int, Int, Double) -> Array[Double]
+
+pub fn interpolate_linear(AnimationTrack, Int, Int, Double) -> Array[Double]
+
+pub fn interpolate_scalar(Double, Double, Double) -> Double
+
+pub fn interpolate_step(AnimationTrack, Int) -> Array[Double]
+
+pub fn interpolation_name(Interpolation) -> String
+
+pub fn leaf_nodes(GltfDocument) -> Array[Int]
+
+pub fn line_count_for_mode(PrimitiveMode, Int) -> Int
+
+pub fn lod_budget_result(LodQualityProfile, LodBudget) -> LodBudgetResult
+
+pub fn lod_level(Int, Int, Int, Double) -> LodLevel
+
+pub fn lod_level_for_distance(LodPlan, Double, Array[Double]) -> LodLevel?
+
+pub fn lod_plan(Int, Int, Array[Double]) -> LodPlan
+
+pub fn lod_plan_summary_lines(LodPlan) -> Array[String]
+
+pub fn lod_profile(Array[LodQualitySample]) -> LodQualityProfile
+
+pub fn lod_profile_at(LodQualityProfile, Int) -> LodQualitySample?
+
+pub fn lod_profile_errors(LodQualityProfile) -> Array[Double]
+
+pub fn lod_profile_lines(LodQualityProfile) -> Array[String]
+
+pub fn lod_profile_memory(LodQualityProfile) -> Array[Int]
+
+pub fn lod_profile_triangle_counts(LodQualityProfile) -> Array[Int]
+
+pub fn lod_quality_score(LodQualityProfile) -> Double
+
+pub fn lod_sample(Int, Int, Int, Double, Double, Double, Int) -> LodQualitySample
+
+pub fn lod_sample_is_better(LodQualitySample, LodQualitySample) -> Bool
+
+pub fn lod_sample_memory_per_triangle(LodQualitySample) -> Double
+
+pub fn lod_sample_screen_error(LodQualitySample, Double, Double) -> Double
+
+pub fn lod_select_level(LodQualityProfile, Double, LodSelectionPolicy, Int?) -> LodSelection
+
+pub fn lod_select_many(LodQualityProfile, Array[Double], LodSelectionPolicy) -> Array[LodSelection]
+
+pub fn lod_total_triangles(LodPlan) -> Int
+
+pub fn lod_transition_alpha(Double, Double, Double) -> Double
+
+pub fn longest_animation_clip(Array[AnimationClipReport]) -> Int?
 
 pub fn mat4_from_trs(Vec3, Quat, Vec3) -> Mat4
 
@@ -136,13 +902,89 @@ pub fn mat4_transform_point(Mat4, Vec3) -> Vec3
 
 pub fn material_alpha_cutoff_is_valid(GltfMaterial) -> Bool
 
+pub fn material_alpha_mode_count(GltfDocument, AlphaMode) -> Int
+
+pub fn material_budget_result(GltfDocument, MaterialBudget) -> MaterialBudgetResult
+
+pub fn material_clamp(Double, Double, Double) -> Double
+
+pub fn material_clamp_color(Color4) -> Color4
+
+pub fn material_double_sided_count(GltfDocument) -> Int
+
+pub fn material_feature_key(GltfMaterial) -> MaterialFeatureKey
+
+pub fn material_feature_key_equal(MaterialFeatureKey, MaterialFeatureKey) -> Bool
+
+pub fn material_feature_key_string(MaterialFeatureKey) -> String
+
+pub fn material_group_features(Array[GltfMaterial]) -> Map[String, Int]
+
+pub fn material_has_emissive_map(GltfMaterial) -> Bool
+
+pub fn material_has_normal_map(GltfMaterial) -> Bool
+
+pub fn material_has_texture(GltfMaterial, TextureSemantic) -> Bool
+
+pub fn material_invalid_count(GltfDocument) -> Int
+
+pub fn material_is_opaque(GltfMaterial) -> Bool
+
+pub fn material_is_transparent(GltfMaterial) -> Bool
+
+pub fn material_name(GltfDocument, Int) -> String
+
 pub fn material_pbr_is_valid(GltfMaterial) -> Bool
+
+pub fn material_pbr_parameter_error_count(GltfMaterial) -> Int
+
+pub fn material_report(GltfDocument, Int) -> MaterialReport
+
+pub fn material_report_summary_lines(Array[MaterialReport]) -> Array[String]
+
+pub fn material_sample(Color4, Double, Double, Vec3, Double) -> MaterialSample
+
+pub fn material_sample_energy(MaterialSample) -> Double
+
+pub fn material_sample_is_emissive(MaterialSample, Double) -> Bool
+
+pub fn material_sample_is_metallic(MaterialSample, Double) -> Bool
+
+pub fn material_sample_is_transparent(MaterialSample, Double) -> Bool
+
+pub fn material_sample_lerp(MaterialSample, MaterialSample, Double) -> MaterialSample
+
+pub fn material_sample_lines(MaterialSampleStats) -> Array[String]
+
+pub fn material_sample_normalize(MaterialSample) -> MaterialSample
+
+pub fn material_sample_stats(Array[MaterialSample]) -> MaterialSampleStats
+
+pub fn material_signature(GltfMaterial) -> String
+
+pub fn material_texcoord_max(GltfDocument) -> Int
+
+pub fn material_texcoord_sets(GltfMaterial) -> Array[Int]
 
 pub fn material_texture_count(GltfMaterial) -> Int
 
+pub fn material_texture_count_by_semantic(GltfMaterial, TextureSemantic) -> Int
+
+pub fn material_texture_info(GltfMaterial, TextureSemantic) -> TextureInfo?
+
+pub fn material_texture_semantics(GltfMaterial) -> Array[TextureSemantic]
+
+pub fn material_texture_slot_reports(GltfDocument, Int) -> Array[TextureSlotReport]
+
 pub fn material_usage_counts(GltfDocument) -> Array[Int]
 
+pub fn material_usage_counts_by_mesh(GltfDocument) -> Array[Int]
+
+pub fn material_uses_nonzero_texcoord(GltfMaterial) -> Bool
+
 pub fn mesh_attribute_signatures(GltfDocument, Int) -> Array[String]
+
+pub fn mesh_bounds_with_transforms(GltfDocument, BinaryAsset, Int) -> Bounds3
 
 pub fn mesh_cost_report(GltfDocument, Int) -> MeshCostReport
 
@@ -150,7 +992,13 @@ pub fn mesh_draw_call_budget(GltfDocument, Int) -> Array[Int]
 
 pub fn mesh_estimated_triangle_count(GltfDocument, GltfMesh) -> Int
 
+pub fn mesh_geometry_report(GltfDocument, BinaryAsset, Int) -> MeshGeometryReport
+
 pub fn mesh_instance_count(GltfDocument, Int) -> Int
+
+pub fn mesh_instance_nodes(GltfDocument) -> Array[Int]
+
+pub fn mesh_meshlet_reports(GltfDocument, BinaryAsset, Int, MeshletLimits) -> Array[MeshletBuildReport]
 
 pub fn mesh_uses_skin(GltfDocument, Int) -> Bool
 
@@ -158,45 +1006,335 @@ pub fn mesh_with_most_triangles(GltfDocument) -> Int?
 
 pub fn mesh_with_most_vertices(GltfDocument) -> Int?
 
+pub fn meshlet_average_occupancy(Array[MeshletBuildReport]) -> (Double, Double)
+
+pub fn meshlet_count(Array[MeshletBuildReport]) -> Int
+
+pub fn meshlet_dropped_triangle_count(Array[MeshletBuildReport]) -> Int
+
+pub fn meshlet_global_triangle(Meshlet, TriangleIndex) -> TriangleIndex?
+
+pub fn meshlet_limits_valid(MeshletLimits) -> Bool
+
+pub fn meshlet_local_index(Meshlet, Int) -> Int?
+
+pub fn meshlet_local_index_bytes(Meshlet) -> Int
+
+pub fn meshlet_memory_bytes(Array[MeshletBuildReport]) -> Int
+
+pub fn meshlet_partition(Array[Vec3], Array[TriangleIndex], MeshletLimits) -> MeshletBuildReport
+
+pub fn meshlet_report_summary_lines(MeshletBuildReport) -> Array[String]
+
+pub fn meshlet_triangle_index_bytes(MeshletLimits) -> Int
+
 pub fn missing_normal_primitive_count(GltfDocument) -> Int
+
+pub fn mobile_geometry_budget() -> GeometryBudget
+
+pub fn mobile_material_budget() -> MaterialBudget
+
+pub fn mobile_meshlet_limits() -> MeshletLimits
+
+pub fn mobile_optimization_policy() -> OptimizationPolicy
+
+pub fn mobile_production_policy() -> ProductionPolicy
 
 pub fn mobile_quality_thresholds() -> QualityThresholds
 
+pub fn mobile_runtime_budget() -> RuntimeBudget
+
+pub fn mobile_skin_budget() -> SkinBudget
+
+pub fn named_node_duplicate_count(GltfDocument) -> Int
+
+pub fn node_ancestors(GltfDocument, Int) -> Array[Int]
+
+pub fn node_branching_factor(GltfDocument, Int) -> Double
+
+pub fn node_camera_index(GltfDocument, Int) -> Int?
+
+pub fn node_child_count(GltfDocument, Int) -> Int
+
+pub fn node_depth(GltfDocument, Int, Int) -> Int?
+
+pub fn node_descendants(GltfDocument, Int) -> Array[Int]
+
+pub fn node_has_children(GltfDocument, Int) -> Bool
+
 pub fn node_has_nontrivial_transform(GltfNode) -> Bool
+
+pub fn node_instance(GltfDocument, Int?, Int) -> NodeInstance?
+
+pub fn node_is_ancestor(GltfDocument, Int, Int) -> Bool
+
+pub fn node_is_descendant(GltfDocument, Int, Int) -> Bool
+
+pub fn node_is_leaf(GltfDocument, Int) -> Bool
+
+pub fn node_leaf_descendant_count(GltfDocument, Int) -> Int
 
 pub fn node_local_transform(GltfNode) -> Mat4
 
+pub fn node_mesh_index(GltfDocument, Int) -> Int?
+
+pub fn node_name(GltfDocument, Int) -> String
+
+pub fn node_parent_indices(GltfDocument) -> Map[Int, Int]
+
+pub fn node_skin_index(GltfDocument, Int) -> Int?
+
+pub fn node_subtree_size(GltfDocument, Int) -> Int
+
+pub fn node_world_position(GltfDocument, Int) -> Vec3
+
+pub fn node_world_transform(GltfDocument, Int) -> Mat4
+
+pub fn normalization_action_name(NormalizationAction) -> String
+
+pub fn normalization_plan(GltfDocument, NormalizationPolicy) -> NormalizationPlan
+
+pub fn normalization_plan_default(GltfDocument) -> NormalizationPlan
+
+pub fn normalization_plan_for_action(NormalizationPlan, NormalizationAction) -> Array[NormalizationFinding]
+
+pub fn normalization_plan_review(NormalizationPlan) -> Array[NormalizationFinding]
+
+pub fn normalization_plan_safe(NormalizationPlan) -> Array[NormalizationFinding]
+
+pub fn normalization_plan_summary_lines(NormalizationPlan) -> Array[String]
+
+pub fn normalize_quaternion(Quat) -> Quat
+
 pub fn normalize_relative_uri(String) -> String
+
+pub fn normalize_weights(Array[Double]) -> Array[Double]
+
+pub fn normalized_material_factors(GltfMaterial) -> (Double, Double, Double)
+
+pub fn normalized_node_name(String, String) -> String
+
+pub fn normalized_quaternion_value(Quat) -> Quat
+
+pub fn normalized_uri_value(String) -> String
+
+pub fn normalized_weight_values(Array[Double]) -> Array[Double]
+
+pub fn optimization_finding_line(OptimizationFinding) -> String
+
+pub fn optimization_finding_lines(OptimizationPlan) -> Array[String]
+
+pub fn optimization_findings_above_priority(OptimizationPlan, Int) -> Array[OptimizationFinding]
+
+pub fn optimization_findings_by_kind(OptimizationPlan, OptimizationKind) -> Array[OptimizationFinding]
+
+pub fn optimization_findings_by_risk(OptimizationPlan, OptimizationRisk) -> Array[OptimizationFinding]
+
+pub fn optimization_kind_name(OptimizationKind) -> String
+
+pub fn optimization_plan(GltfDocument, BinaryAsset, OptimizationPolicy) -> OptimizationPlan
+
+pub fn optimization_plan_default(GltfDocument, BinaryAsset) -> OptimizationPlan
+
+pub fn optimization_plan_has_blockers(OptimizationPlan) -> Bool
+
+pub fn optimization_plan_is_empty(OptimizationPlan) -> Bool
+
+pub fn optimization_plan_summary_lines(OptimizationPlan) -> Array[String]
+
+pub fn optimization_plan_top_priority(OptimizationPlan) -> OptimizationFinding?
+
+pub fn optimization_risk_name(OptimizationRisk) -> String
+
+pub fn orphan_node_indices(GltfDocument) -> Array[Int]
+
+pub fn overlapping_buffer_view_relations(GltfDocument) -> Array[BufferViewRelation]
+
+pub fn package_plan(ResourceManifest, String) -> PackagePlan
+
+pub fn package_plan_unique_destinations(PackagePlan) -> Array[String]
+
+pub fn package_plan_valid(PackagePlan) -> Bool
 
 pub fn parse_gltf_object(Map[String, Json]) -> GltfDocument raise ParseError
 
 pub fn parse_gltf_string(String) -> GltfDocument raise ParseError
 
+pub fn point_count_for_mode(PrimitiveMode, Int) -> Int
+
+pub fn positions_bounds(Array[Vec3]) -> Bounds3
+
+pub fn primitive_attribute_accessor(GltfPrimitive, String) -> Int?
+
+pub fn primitive_attribute_bytes(GltfDocument, GltfPrimitive) -> Int
+
 pub fn primitive_attribute_signature(GltfPrimitive) -> String
+
+pub fn primitive_cache_hit_ratio(GltfDocument, BinaryAsset, GltfPrimitive, cache_size? : Int) -> Double
+
+pub fn primitive_channel_is_complete(GeometryChannelSummary, Bool) -> Bool
+
+pub fn primitive_channel_summary(GltfPrimitive) -> GeometryChannelSummary
+
+pub fn primitive_colors(GltfDocument, BinaryAsset, GltfPrimitive) -> Array[Vec4]
 
 pub fn primitive_estimated_triangle_count(GltfDocument, GltfPrimitive) -> Int
 
+pub fn primitive_geometry_report(GltfDocument, BinaryAsset, Int, Int, GltfPrimitive) -> PrimitiveGeometryReport
+
+pub fn primitive_has_attribute(GltfPrimitive, String) -> Bool
+
+pub fn primitive_has_custom_channels(GeometryChannelSummary) -> Bool
+
+pub fn primitive_index_bytes(GltfDocument, GltfPrimitive) -> Int
+
 pub fn primitive_index_count(GltfDocument, GltfPrimitive) -> Int
+
+pub fn primitive_index_count_from_data(GltfDocument, BinaryAsset, GltfPrimitive) -> Int
+
+pub fn primitive_indices(GltfDocument, BinaryAsset, GltfPrimitive) -> Array[Int]
+
+pub fn primitive_influence_count(GltfDocument, BinaryAsset, GltfPrimitive) -> Int
 
 pub fn primitive_is_indexed(GltfPrimitive) -> Bool
 
+pub fn primitive_joint_indices(GltfDocument, BinaryAsset, GltfPrimitive) -> Array[Int]
+
+pub fn primitive_meshlet_report(GltfDocument, BinaryAsset, Int, Int, MeshletLimits) -> MeshletBuildReport
+
+pub fn primitive_missing_channel_count(GeometryChannelSummary) -> Int
+
+pub fn primitive_normals(GltfDocument, BinaryAsset, GltfPrimitive) -> Array[Vec3]
+
+pub fn primitive_overdraw_proxy(Array[Vec3], Array[TriangleIndex]) -> Double
+
+pub fn primitive_position_quantization(GltfDocument, BinaryAsset, Int, Int, Int) -> QuantizationPlan
+
+pub fn primitive_positions(GltfDocument, BinaryAsset, GltfPrimitive) -> Array[Vec3]
+
 pub fn primitive_report(GltfDocument, Int, Int) -> PrimitiveReport
 
+pub fn primitive_tangents(GltfDocument, BinaryAsset, GltfPrimitive) -> Array[Vec4]
+
+pub fn primitive_texcoords(GltfDocument, BinaryAsset, GltfPrimitive, Int) -> Array[Vec2]
+
 pub fn primitive_topology_name(PrimitiveMode) -> String
+
+pub fn primitive_total_bytes(GltfDocument, GltfPrimitive) -> Int
+
+pub fn primitive_triangle_metrics(GltfDocument, BinaryAsset, GltfPrimitive) -> TriangleMetrics
+
+pub fn primitive_triangles(GltfDocument, BinaryAsset, GltfPrimitive) -> Array[TriangleIndex]
 
 pub fn primitive_uses_material(GltfDocument, Int, Int, Int) -> Bool
 
 pub fn primitive_vertex_count(GltfDocument, GltfPrimitive) -> Int
 
+pub fn primitive_vertex_reuse_ratio(GltfDocument, BinaryAsset, GltfPrimitive) -> Double
+
+pub fn production_gate(ProductionMetrics, SemanticValidationReport, DocumentGeometryReport, Array[MaterialReport], ResourceManifest, Array[AnimationClipReport], Array[SkinReport], ProductionPolicy) -> ProductionGate
+
+pub fn production_profile_failure_lines(ProductionProfile) -> Array[String]
+
+pub fn production_profile_has_blockers(ProductionProfile) -> Bool
+
+pub fn production_profile_is_acceptable(ProductionProfile) -> Bool
+
+pub fn production_profile_score(ProductionProfile) -> Int
+
+pub fn production_profile_summary_lines(ProductionProfile) -> Array[String]
+
+pub fn production_profile_to_json(ProductionProfile) -> String
+
+pub fn production_profile_warning_lines(ProductionProfile) -> Array[String]
+
+pub fn production_score(ProductionMetrics, ProductionPolicy) -> Int
+
+pub fn production_verdict_name(ProductionVerdict) -> String
+
 pub fn quality_gate(AssetReport, QualityThresholds) -> QualityGate
+
+pub fn quality_gate_check(QualityGateKind, String, QualityGateStatus, Double, Array[String]) -> QualityGateCheck
 
 pub fn quality_gate_default(AssetReport) -> QualityGate
 
+pub fn quality_gate_has_kind(QualityGateMatrix, QualityGateKind) -> Bool
+
+pub fn quality_gate_kind_name(QualityGateKind) -> String
+
+pub fn quality_gate_matrix(Array[QualityGateCheck]) -> QualityGateMatrix
+
+pub fn quality_gate_missing_kinds(QualityGateMatrix, Array[QualityGateKind]) -> Array[String]
+
 pub fn quality_gate_mobile(AssetReport) -> QualityGate
+
+pub fn quality_gate_release_check(QualityGateMatrix, QualityGatePolicy) -> QualityGateMatrix
+
+pub fn quality_gate_status_name(QualityGateStatus) -> String
+
+pub fn quality_gate_summary_lines(QualityGateMatrix) -> Array[String]
 
 pub fn quality_violation_lines(QualityGate) -> Array[String]
 
+pub fn quantization_error_is_acceptable(QuantizationPlan, Double) -> Bool
+
+pub fn quantization_plan_for_bounds(String, Bounds3, Int, Int) -> QuantizationPlan
+
 pub fn quat(Double, Double, Double, Double) -> Quat
+
+pub fn quaternion_dot(Quat, Quat) -> Double
+
+pub fn quaternion_lerp(Quat, Quat, Double) -> Quat
+
+pub fn query_scene_nodes(GltfDocument, NodeSelection) -> SceneQueryResult
+
+pub fn reachable_scene_nodes(GltfDocument, Int) -> Array[Int]
+
+pub fn read_bytes(Bytes, Int, Int) -> Bytes raise BinaryError
+
+pub fn read_f32_be(Bytes, Int) -> Double raise BinaryError
+
+pub fn read_f32_le(Bytes, Int) -> Double raise BinaryError
+
+pub fn read_i16_be(Bytes, Int) -> Int raise BinaryError
+
+pub fn read_i16_le(Bytes, Int) -> Int raise BinaryError
+
+pub fn read_i32_be(Bytes, Int) -> Int raise BinaryError
+
+pub fn read_i32_le(Bytes, Int) -> Int raise BinaryError
+
+pub fn read_i8(Bytes, Int) -> Int raise BinaryError
+
+pub fn read_u16_be(Bytes, Int) -> Int raise BinaryError
+
+pub fn read_u16_le(Bytes, Int) -> Int raise BinaryError
+
+pub fn read_u32_be(Bytes, Int) -> UInt raise BinaryError
+
+pub fn read_u32_le(Bytes, Int) -> UInt raise BinaryError
+
+pub fn read_u8(Bytes, Int) -> Int raise BinaryError
+
+pub fn report_bundle_annotations(ReportBundle) -> Array[String]
+
+pub fn report_bundle_failed_sections(ReportBundle) -> Array[String]
+
+pub fn report_bundle_from_profile(ProductionProfile) -> ReportBundle
+
+pub fn report_bundle_has_errors(ReportBundle) -> Bool
+
+pub fn report_bundle_json(ReportBundle) -> String
+
+pub fn report_bundle_lines(ReportBundle) -> Array[String]
+
+pub fn report_bundle_markdown(ReportBundle) -> String
+
+pub fn report_bundle_section(ReportBundle, String) -> ReportSection?
+
+pub fn report_bundle_summary(ReportBundle) -> String
+
+pub fn report_bundle_summary_lines(ReportBundle) -> Array[String]
 
 pub fn report_geometry(GltfDocument) -> GeometryReport
 
@@ -206,21 +1344,575 @@ pub fn report_is_acceptable(AssetReport) -> Bool
 
 pub fn report_resources(GltfDocument) -> ResourceReport
 
+pub fn report_section(String, Array[String], Bool) -> ReportSection
+
 pub fn report_summary_lines(AssetReport) -> Array[String]
 
 pub fn report_to_json(AssetReport) -> String
 
+pub fn resolve_scene_path(GltfDocument, Int, String) -> Int?
+
+pub fn resource_extension_count(ResourceManifest, String) -> Int
+
+pub fn resource_fingerprint(String) -> Int
+
+pub fn resource_fingerprint_bytes(Bytes) -> Int
+
+pub fn resource_id(ResourceKind, Int) -> String
+
+pub fn resource_kind_name(ResourceKind) -> String
+
+pub fn resource_manifest(GltfDocument, ResourcePolicy) -> ResourceManifest
+
+pub fn resource_manifest_buffer_count(ResourceManifest) -> Int
+
+pub fn resource_manifest_default(GltfDocument) -> ResourceManifest
+
+pub fn resource_manifest_duplicate_groups(ResourceManifest) -> Array[Array[String]]
+
+pub fn resource_manifest_embedded_count(ResourceManifest) -> Int
+
+pub fn resource_manifest_external_bytes(ResourceManifest) -> Int
+
+pub fn resource_manifest_external_uris(ResourceManifest) -> Array[String]
+
+pub fn resource_manifest_image_count(ResourceManifest) -> Int
+
+pub fn resource_manifest_summary_lines(ResourceManifest) -> Array[String]
+
+pub fn resource_package_destination(String, ResourceRecord) -> String
+
+pub fn resource_policy_result(ResourceManifest, ResourcePolicy) -> ResourcePolicyResult
+
+pub fn resource_uri_extension(String?) -> String?
+
+pub fn resource_uri_is_embedded(String?) -> Bool
+
+pub fn resource_uri_is_external(String?) -> Bool
+
+pub fn resource_uri_is_safe(String?, ResourcePolicy) -> Bool
+
+pub fn resource_uri_media_type(String?) -> String?
+
+pub fn resource_uri_normalized(String?) -> String?
+
+pub fn resource_uri_payload_length(String?) -> Int
+
+pub fn runtime_budget_result(RuntimeEstimate, RuntimeBudget) -> RuntimeBudgetResult
+
+pub fn runtime_estimate(ProductionProfile) -> RuntimeEstimate
+
+pub fn runtime_frame_sample(Int, Double, Double, Int, Int, Int, Int) -> RuntimeFrameSample
+
+pub fn runtime_peak_upload(Array[RuntimeFrameSample]) -> Int
+
+pub fn runtime_percentile(Array[Double], Double) -> Double
+
+pub fn runtime_sample_average(Array[RuntimeFrameSample]) -> (Double, Double)
+
+pub fn runtime_sort_values(Array[Double]) -> Unit
+
+pub fn runtime_stats(Array[RuntimeFrameSample]) -> RuntimeStats
+
+pub fn runtime_stats_average_instances(RuntimeStats) -> Double
+
+pub fn runtime_stats_average_triangles(RuntimeStats) -> Double
+
+pub fn runtime_stats_average_upload(RuntimeStats) -> Double
+
+pub fn runtime_stats_frame_count(RuntimeStats) -> Int
+
+pub fn runtime_stats_frame_range(RuntimeStats) -> (Int, Int)
+
+pub fn runtime_stats_has_spike(RuntimeStats, Double) -> Bool
+
+pub fn runtime_stats_lines(RuntimeStats) -> Array[String]
+
+pub fn runtime_stats_max_instances(RuntimeStats) -> Int
+
+pub fn runtime_stats_max_triangles(RuntimeStats) -> Int
+
+pub fn runtime_stats_merge(RuntimeStats, RuntimeStats) -> RuntimeStats
+
+pub fn runtime_stats_total_draws(RuntimeStats) -> Int
+
+pub fn runtime_stats_total_upload(RuntimeStats) -> Int
+
+pub fn sample_animation_track(GltfDocument, BinaryAsset, Int, Int, Double) -> AnimationSample
+
+pub fn sample_animation_track_at(AnimationTrack, Double, AnimationPlaybackMode) -> AnimationSample
+
+pub fn scene_average_children(GltfDocument, Array[Int]) -> Double
+
+pub fn scene_camera_indices(GltfDocument, Int) -> Array[Int]
+
 pub fn scene_cycle_count(GltfDocument) -> Int
+
+pub fn scene_depth_histogram(GltfDocument, Int?) -> Array[Int]
+
+pub fn scene_graph_report(GltfDocument, Int?) -> SceneGraphReport
+
+pub fn scene_has_multiple_roots(GltfDocument, Int) -> Bool
+
+pub fn scene_has_orphans(GltfDocument, Int) -> Bool
+
+pub fn scene_is_connected(GltfDocument, Int) -> Bool
+
+pub fn scene_max_branching_factor(GltfDocument, Int) -> Int
+
+pub fn scene_mesh_indices(GltfDocument, Int) -> Array[Int]
+
+pub fn scene_mesh_instances(GltfDocument, Int) -> Array[NodeInstance]
+
+pub fn scene_node_depths(GltfDocument, Int) -> Map[Int, Int]
+
+pub fn scene_node_path(GltfDocument, Int?, Int) -> SceneNodePath
+
+pub fn scene_node_path_for(GltfDocument, Int, Int) -> String
+
+pub fn scene_node_path_text(SceneNodePath) -> String
+
+pub fn scene_nodes_with_no_parent(GltfDocument) -> Array[Int]
+
+pub fn scene_path_lookup(GltfDocument, Int) -> Map[String, Int]
+
+pub fn scene_report_summary_lines(SceneGraphReport) -> Array[String]
 
 pub fn scene_root_count(GltfDocument) -> Int
 
+pub fn scene_roots(GltfDocument, Int) -> Array[Int]
+
+pub fn scene_schedule(Array[SceneTask]) -> SceneSchedule
+
+pub fn scene_schedule_add_task(SceneSchedule, SceneTask) -> SceneSchedule
+
+pub fn scene_schedule_advance(SceneSchedule, Int) -> SceneSchedule
+
+pub fn scene_schedule_complete(SceneSchedule, Int) -> SceneSchedule
+
+pub fn scene_schedule_completed_cost(SceneSchedule) -> Int
+
+pub fn scene_schedule_cycle_nodes(SceneSchedule) -> Array[Int]
+
+pub fn scene_schedule_fail(SceneSchedule, Int) -> SceneSchedule
+
+pub fn scene_schedule_lines(SceneSchedule) -> Array[String]
+
+pub fn scene_schedule_link(SceneSchedule, Int, Int) -> SceneSchedule
+
+pub fn scene_schedule_pending_cost(SceneSchedule) -> Int
+
+pub fn scene_schedule_refresh(SceneSchedule) -> SceneSchedule
+
+pub fn scene_schedule_take(SceneSchedule, Int) -> (SceneSchedule, Array[Int])
+
+pub fn scene_scheduler_result(SceneSchedule, SceneSchedulerPolicy) -> SceneSchedulerResult
+
+pub fn scene_skin_indices(GltfDocument, Int) -> Array[Int]
+
+pub fn scene_snapshot(GltfDocument, Int) -> SceneSnapshot
+
+pub fn scene_snapshot_depth_histogram(SceneSnapshot) -> Map[Int, Int]
+
+pub fn scene_snapshot_diff(SceneSnapshot, SceneSnapshot) -> SceneSnapshotDiff
+
+pub fn scene_snapshot_diff_kind_count(SceneSnapshotDiff, String) -> Int
+
+pub fn scene_snapshot_diff_lines(SceneSnapshotDiff) -> Array[String]
+
+pub fn scene_snapshot_leaf_indices(SceneSnapshot) -> Array[Int]
+
+pub fn scene_snapshot_lines(SceneSnapshot) -> Array[String]
+
+pub fn scene_snapshot_mesh_indices(SceneSnapshot) -> Array[Int]
+
+pub fn scene_snapshot_node(Int, Int?, GltfNode, Int) -> SceneSnapshotNode
+
+pub fn scene_snapshot_node_at(SceneSnapshot, Int) -> SceneSnapshotNode?
+
+pub fn scene_snapshot_node_signature(GltfNode) -> String
+
+pub fn scene_snapshot_signature(Array[SceneSnapshotNode]) -> String
+
+pub fn scene_snapshot_skin_indices(SceneSnapshot) -> Array[Int]
+
+pub fn scene_sort_ready(Array[Int], Array[SceneTask]) -> Unit
+
+pub fn scene_task(Int, Int, SceneTaskKind, Int, Int) -> SceneTask
+
+pub fn scene_task_add_dependency(SceneTask, Int) -> SceneTask
+
+pub fn scene_task_add_dependent(SceneTask, Int) -> SceneTask
+
+pub fn scene_task_dependency_cost(SceneTask, Array[SceneTask]) -> Int
+
+pub fn scene_task_is_ready(SceneTask, Array[SceneTask]) -> Bool
+
+pub fn scene_task_is_terminal(SceneTask) -> Bool
+
+pub fn scene_task_kind_name(SceneTaskKind) -> String
+
+pub fn scene_task_kind_rank(SceneTaskKind) -> Int
+
+pub fn scene_task_score(SceneTask, Array[SceneTask]) -> Double
+
+pub fn scene_task_state_name(SceneTaskState) -> String
+
 pub fn scene_transform_depth(GltfDocument) -> Int
+
+pub fn scene_world_positions(GltfDocument, Int) -> Map[Int, Vec3]
+
+pub fn selection_for_leaves() -> NodeSelection
+
+pub fn selection_for_mesh_nodes() -> NodeSelection
+
+pub fn selection_for_name(String) -> NodeSelection
+
+pub fn selection_for_skinned_nodes() -> NodeSelection
+
+pub fn semantic_error_issues(SemanticValidationReport) -> Array[SemanticIssue]
+
+pub fn semantic_issue_line(SemanticIssue) -> String
+
+pub fn semantic_issue_lines(SemanticValidationReport) -> Array[String]
+
+pub fn semantic_report_summary_lines(SemanticValidationReport) -> Array[String]
+
+pub fn semantic_rule_count(SemanticValidationReport, String) -> Int
+
+pub fn semantic_severity_name(SemanticSeverity) -> String
+
+pub fn semantic_validate(GltfDocument, SemanticValidationPolicy) -> SemanticValidationReport
+
+pub fn semantic_validate_default(GltfDocument) -> SemanticValidationReport
+
+pub fn semantic_validate_strict(GltfDocument) -> SemanticValidationReport
+
+pub fn semantic_warning_issues(SemanticValidationReport) -> Array[SemanticIssue]
+
+pub fn simulate_vertex_cache(Array[Int], Int) -> Double
+
+pub fn skin_budget_result(Array[SkinReport], SkinBudget) -> SkinBudgetResult
+
+pub fn skin_duplicate_joint_count(GltfDocument, Int) -> Int
+
+pub fn skin_inverse_bind_matrix(GltfDocument, BinaryAsset, Int, Int) -> Mat4
+
+pub fn skin_issue_count(SkinReport, DiagnosticSeverity) -> Int
+
+pub fn skin_joint_count(GltfDocument, Int) -> Int
+
+pub fn skin_joint_depth(GltfDocument, Int, Int) -> Int
+
+pub fn skin_joint_infos(GltfDocument, Int) -> Array[SkinJointInfo]
+
+pub fn skin_joint_matrices(GltfDocument, BinaryAsset, Int) -> Array[Mat4]
+
+pub fn skin_joint_matrix(GltfDocument, BinaryAsset, Int, Int) -> Mat4
+
+pub fn skin_joint_node(GltfDocument, Int, Int) -> Int?
+
+pub fn skin_joint_parent_slot(GltfDocument, Int, Int) -> Int?
+
+pub fn skin_joint_path(GltfDocument, Int, Int) -> String
+
+pub fn skin_joint_slots(GltfDocument, Int) -> Map[Int, Int]
+
+pub fn skin_joint_world_transform(GltfDocument, Int, Int) -> Mat4
+
+pub fn skin_max_depth(GltfDocument, Int) -> Int
+
+pub fn skin_name(GltfDocument, Int) -> String?
+
+pub fn skin_report(GltfDocument, BinaryAsset, Int) -> SkinReport
+
+pub fn skin_report_summary_lines(SkinReport) -> Array[String]
+
+pub fn skin_root_joint_slot(GltfDocument, Int) -> Int?
+
+pub fn skin_used_by_mesh(GltfDocument, Int) -> Array[Int]
+
+pub fn skin_used_by_node(GltfDocument, Int) -> Array[Int]
+
+pub fn skin_weight_summary(GltfDocument, BinaryAsset, GltfPrimitive) -> WeightSummary
+
+pub fn skinned_instance_nodes(GltfDocument) -> Array[Int]
 
 pub fn skinned_primitive_count(GltfDocument) -> Int
 
+pub fn spatial_aabb(Vec3, Vec3) -> SpatialAabb
+
+pub fn spatial_aabb_center(SpatialAabb) -> Vec3
+
+pub fn spatial_aabb_clamp_point(SpatialAabb, Vec3) -> Vec3
+
+pub fn spatial_aabb_contains_bounds(SpatialAabb, SpatialAabb) -> Bool
+
+pub fn spatial_aabb_contains_point(SpatialAabb, Vec3) -> Bool
+
+pub fn spatial_aabb_empty() -> SpatialAabb
+
+pub fn spatial_aabb_expand(SpatialAabb, Double) -> SpatialAabb
+
+pub fn spatial_aabb_extent(SpatialAabb) -> Vec3
+
+pub fn spatial_aabb_from_points(Array[Vec3]) -> SpatialAabb
+
+pub fn spatial_aabb_half_extent(SpatialAabb) -> Vec3
+
+pub fn spatial_aabb_intersection(SpatialAabb, SpatialAabb) -> SpatialAabb?
+
+pub fn spatial_aabb_is_valid(SpatialAabb) -> Bool
+
+pub fn spatial_aabb_overlaps(SpatialAabb, SpatialAabb) -> Bool
+
+pub fn spatial_aabb_surface_area(SpatialAabb) -> Double
+
+pub fn spatial_aabb_surface_normal(SpatialAabb, Vec3) -> Vec3
+
+pub fn spatial_aabb_union(SpatialAabb, SpatialAabb) -> SpatialAabb
+
+pub fn spatial_aabb_volume(SpatialAabb) -> Double
+
+pub fn spatial_distance_squared(Vec3, Vec3) -> Double
+
+pub fn spatial_frustum(Array[SpatialPlane]) -> SpatialFrustum
+
+pub fn spatial_frustum_contains_point(SpatialFrustum, Vec3) -> Bool
+
+pub fn spatial_frustum_intersects_bounds(SpatialFrustum, SpatialAabb) -> Bool
+
+pub fn spatial_frustum_intersects_sphere(SpatialFrustum, Vec3, Double) -> Bool
+
+pub fn spatial_index(Array[SpatialItem], Double, SpatialAabb) -> SpatialIndex
+
+pub fn spatial_index_active_items(SpatialIndex) -> Array[SpatialItem]
+
+pub fn spatial_index_bounds(SpatialIndex) -> SpatialAabb
+
+pub fn spatial_index_empty() -> SpatialIndex
+
+pub fn spatial_index_find(SpatialIndex, Int) -> SpatialItem?
+
+pub fn spatial_index_insert(SpatialIndex, SpatialItem) -> SpatialIndex
+
+pub fn spatial_index_insert_many(SpatialIndex, Array[SpatialItem]) -> SpatialIndex
+
+pub fn spatial_index_remove(SpatialIndex, Int) -> SpatialIndex
+
+pub fn spatial_index_summary_lines(SpatialIndex) -> Array[String]
+
+pub fn spatial_index_update(SpatialIndex, SpatialItem) -> SpatialIndex
+
+pub fn spatial_item(Int, SpatialAabb, Int) -> SpatialItem
+
+pub fn spatial_item_distance_squared(SpatialItem, Vec3) -> Double
+
+pub fn spatial_item_set_active(SpatialItem, Bool) -> SpatialItem
+
+pub fn spatial_item_with_radius(Int, SpatialAabb, Double, Int) -> SpatialItem
+
+pub fn spatial_nearest(SpatialIndex, Vec3, Int) -> SpatialHit?
+
+pub fn spatial_plane(Vec3, Double) -> SpatialPlane
+
+pub fn spatial_plane_aabb_distance(SpatialPlane, SpatialAabb) -> Double
+
+pub fn spatial_plane_signed_distance(SpatialPlane, Vec3) -> Double
+
+pub fn spatial_point_aabb_distance_squared(Vec3, SpatialAabb) -> Double
+
+pub fn spatial_query_bounds(SpatialIndex, SpatialAabb, Int) -> SpatialQueryResult
+
+pub fn spatial_query_frustum(SpatialIndex, SpatialFrustum, Int) -> SpatialQueryResult
+
+pub fn spatial_query_ray(SpatialIndex, SpatialRay, Int, Double) -> SpatialQueryResult
+
+pub fn spatial_query_sphere(SpatialIndex, Vec3, Double, Int) -> SpatialQueryResult
+
+pub fn spatial_query_stats_lines(SpatialQueryStats) -> Array[String]
+
+pub fn spatial_ray(Vec3, Vec3) -> SpatialRay
+
+pub fn spatial_ray_aabb_distance(SpatialRay, SpatialAabb) -> Double?
+
+pub fn spatial_ray_item_hit(SpatialRay, SpatialItem) -> SpatialHit?
+
+pub fn spatial_ray_point(SpatialRay, Double) -> Vec3
+
+pub fn spatial_ray_sphere_distance(SpatialRay, Vec3, Double) -> Double?
+
+pub fn spatial_validate_index(SpatialIndex, SpatialPolicy) -> SpatialBudgetResult
+
+pub fn spatial_vec3(Double, Double, Double) -> Vec3
+
+pub fn spatial_visible_items(SpatialIndex, SpatialFrustum, Int) -> Array[Int]
+
+pub fn stream_apply_selection(Array[StreamRequest], StreamSelection) -> Array[StreamRequest]
+
+pub fn stream_bytes_for_priority(Array[StreamRequest], StreamPriority) -> Int
+
+pub fn stream_bytes_for_state(Array[StreamRequest], StreamState) -> Int
+
+pub fn stream_chunk_resident_bytes(Array[StreamChunk]) -> Int
+
+pub fn stream_chunk_summary_lines(Array[StreamChunk]) -> Array[String]
+
+pub fn stream_chunk_total_bytes(Array[StreamChunk]) -> Int
+
+pub fn stream_coalesce(Array[StreamRequest]) -> Array[StreamRequest]
+
+pub fn stream_evict(Array[StreamRequest], Int) -> Array[StreamRequest]
+
+pub fn stream_group_by_resource(Array[StreamRequest]) -> Map[Int, Int]
+
+pub fn stream_mark_failed(Array[StreamRequest], Int, Bool) -> Array[StreamRequest]
+
+pub fn stream_mark_ready(Array[StreamRequest], Int) -> Array[StreamRequest]
+
+pub fn stream_merge_requests(StreamRequest, StreamRequest) -> StreamRequest?
+
+pub fn stream_plan(Array[StreamRequest], StreamBudget) -> StreamPlan
+
+pub fn stream_plan_lines(StreamPlan) -> Array[String]
+
+pub fn stream_priority_name(StreamPriority) -> String
+
+pub fn stream_priority_rank(StreamPriority) -> Int
+
+pub fn stream_request(Int, Int, Int, Int, StreamPriority) -> StreamRequest
+
+pub fn stream_request_end(StreamRequest) -> Int
+
+pub fn stream_request_is_active(StreamRequest) -> Bool
+
+pub fn stream_request_is_evictable(StreamRequest) -> Bool
+
+pub fn stream_request_is_resident(StreamRequest) -> Bool
+
+pub fn stream_request_retry(StreamRequest) -> StreamRequest
+
+pub fn stream_request_score(StreamRequest) -> Double
+
+pub fn stream_request_set_state(StreamRequest, StreamState) -> StreamRequest
+
+pub fn stream_request_with_context(StreamRequest, Int, Double) -> StreamRequest
+
+pub fn stream_requests_overlap(StreamRequest, StreamRequest) -> Bool
+
+pub fn stream_select(Array[StreamRequest], StreamBudget) -> StreamSelection
+
+pub fn stream_selection_contains(StreamSelection, Int) -> Bool
+
+pub fn stream_selection_lines(StreamSelection) -> Array[String]
+
+pub fn stream_selection_priority_bytes(StreamSelection, StreamPriority) -> Int
+
+pub fn stream_sort_requests(Array[StreamRequest]) -> Unit
+
+pub fn stream_state_name(StreamState) -> String
+
+pub fn stream_total_bytes(Array[StreamRequest]) -> Int
+
+pub fn stream_validate(Array[StreamRequest], StreamBudget) -> StreamValidation
+
 pub fn strict_diagnostic_policy() -> DiagnosticPolicy
 
+pub fn strict_semantic_policy() -> SemanticValidationPolicy
+
+pub fn texture_embedded_count(GltfDocument) -> Int
+
+pub fn texture_external_count(GltfDocument) -> Int
+
+pub fn texture_name(GltfDocument, Int) -> String
+
+pub fn texture_report(GltfDocument, Int) -> TextureReport
+
+pub fn texture_semantic_name(TextureSemantic) -> String
+
+pub fn topology_add(Vec3, Vec3) -> Vec3
+
+pub fn topology_boundary_edges(Array[TopologyTriangle]) -> Array[TopologyEdge]
+
+pub fn topology_budget_result(TopologyReport, TopologyPolicy) -> TopologyBudgetResult
+
+pub fn topology_component_for_triangle(TopologyReport, Int) -> Int?
+
+pub fn topology_component_largest(TopologyReport) -> TopologyComponent?
+
+pub fn topology_connected_components(Array[TopologyTriangle]) -> Array[TopologyComponent]
+
+pub fn topology_cross(Vec3, Vec3) -> Vec3
+
+pub fn topology_distance_squared(Vec3, Vec3) -> Double
+
+pub fn topology_dot(Vec3, Vec3) -> Double
+
+pub fn topology_duplicate_triangle_count(Array[TopologyTriangle]) -> Int
+
+pub fn topology_edge_direction(Int, Int) -> Bool
+
+pub fn topology_edge_endpoints(Int, Int) -> (Int, Int)
+
+pub fn topology_edge_key(Int, Int) -> String
+
+pub fn topology_edges(Array[TopologyTriangle]) -> Array[TopologyEdge]
+
+pub fn topology_indexed_triangles(Array[Int]) -> Array[TopologyTriangle]
+
+pub fn topology_isolated_vertices(Array[TopologyTriangle], Int) -> Array[Int]
+
+pub fn topology_length_squared(Vec3) -> Double
+
+pub fn topology_non_manifold_edges(Array[TopologyTriangle]) -> Array[TopologyEdge]
+
+pub fn topology_normalize(Vec3) -> Vec3
+
+pub fn topology_quality_score(TopologyReport) -> Double
+
+pub fn topology_report(Array[TopologyTriangle], Int) -> TopologyReport
+
+pub fn topology_report_lines(TopologyReport) -> Array[String]
+
+pub fn topology_scale(Vec3, Double) -> Vec3
+
+pub fn topology_subtract(Vec3, Vec3) -> Vec3
+
+pub fn topology_triangle(Int, Int, Int) -> TopologyTriangle
+
+pub fn topology_triangle_area(Vec3, Vec3, Vec3) -> Double
+
+pub fn topology_triangle_canonical_key(TopologyTriangle) -> String
+
+pub fn topology_triangle_edge_count(TopologyTriangle) -> Int
+
+pub fn topology_triangle_has_vertex(TopologyTriangle, Int) -> Bool
+
+pub fn topology_triangle_index_stream(Array[TopologyTriangle]) -> Array[Int]
+
+pub fn topology_triangle_is_degenerate(TopologyTriangle) -> Bool
+
+pub fn topology_triangle_key(TopologyTriangle) -> String
+
+pub fn topology_triangle_normal(Vec3, Vec3, Vec3) -> Vec3
+
+pub fn topology_triangle_signed_volume(Vec3, Vec3, Vec3) -> Double
+
+pub fn topology_triangle_vertices(TopologyTriangle) -> Array[Int]
+
+pub fn topology_triangles_touching_triangle(Array[TopologyTriangle], Int) -> Array[Int]
+
+pub fn topology_triangles_touching_vertex(Array[TopologyTriangle], Int) -> Array[Int]
+
+pub fn topology_vertex_references(Array[TopologyTriangle], Int) -> Array[Int]
+
+pub fn topology_winding_conflicts(Array[TopologyTriangle]) -> Array[TopologyEdge]
+
+pub fn total_animation_keyframes(Array[AnimationClipReport]) -> Int
+
 pub fn total_attribute_slots(GltfDocument) -> Int
+
+pub fn total_buffer_overlap_bytes(GltfDocument) -> Int
 
 pub fn total_estimated_vertex_bytes(GltfDocument) -> Int
 
@@ -228,9 +1920,37 @@ pub fn transformed_node_bounds(Bounds3, Mat4) -> Bounds3
 
 pub fn traverse_node_tree(GltfDocument) -> NodeTreeInfo
 
+pub fn triangle_area(Array[Vec3], TriangleIndex) -> Double
+
+pub fn triangle_count_for_mode(PrimitiveMode, Int) -> Int
+
+pub fn triangle_cross(Array[Vec3], TriangleIndex) -> Vec3?
+
+pub fn triangle_edge_ab(Array[Vec3], TriangleIndex) -> Vec3?
+
+pub fn triangle_edge_ac(Array[Vec3], TriangleIndex) -> Vec3?
+
+pub fn triangle_index_has_duplicate_vertex(TriangleIndex) -> Bool
+
+pub fn triangle_index_is_valid(TriangleIndex, Int) -> Bool
+
+pub fn triangle_normal(Array[Vec3], TriangleIndex) -> Vec3
+
+pub fn triangle_position(Array[Vec3], TriangleIndex, Int) -> Vec3?
+
+pub fn triangle_winding(Array[Vec3], TriangleIndex) -> PrimitiveWinding
+
+pub fn u32_to_le_bytes(UInt) -> Bytes
+
 pub fn unindexed_mesh_count(GltfDocument) -> Int
 
 pub fn unpack_glb(Bytes) -> GlbData raise ParseError
+
+pub fn unused_buffer_indices(GltfDocument) -> Array[Int]
+
+pub fn unused_buffer_view_indices(GltfDocument) -> Array[Int]
+
+pub fn unused_material_indices(GltfDocument) -> Array[Int]
 
 pub fn uri_data_media_type(String) -> String?
 
@@ -246,9 +1966,13 @@ pub fn uri_is_safe_external(String) -> Bool
 
 pub fn uri_scheme(String) -> String?
 
+pub fn utf8_encode_string(String) -> Bytes
+
 pub fn validate_accessor_layouts(GltfDocument) -> Array[LayoutIssue]
 
 pub fn validate_document(GltfDocument) -> ValidationReport
+
+pub fn validate_glb_container(Bytes) -> Array[String]
 
 pub fn vec2(Double, Double) -> Vec2
 
@@ -280,9 +2004,43 @@ pub fn vec3_scale(Vec3, Double) -> Vec3
 
 pub fn vec3_sub(Vec3, Vec3) -> Vec3
 
+pub fn weight_max(Array[Double]) -> Double
+
+pub fn weight_negative_count(Array[Double]) -> Int
+
+pub fn weight_nonzero_count(Array[Double]) -> Int
+
+pub fn weight_over_one_count(Array[Double]) -> Int
+
+pub fn weight_sum(Array[Double]) -> Double
+
+pub fn weights_are_normalized(Array[Double], tolerance? : Double) -> Bool
+
 pub fn world_transform_for(TransformReport, Int) -> Mat4?
 
 // Errors
+pub(all) suberror BinaryError {
+  NegativeOffset(offset~ : Int)
+  InvalidWidth(width~ : Int)
+  OutOfBounds(offset~ : Int, width~ : Int, length~ : Int)
+  InvalidStride(stride~ : Int, element_size~ : Int)
+  MissingBuffer(index~ : Int)
+  MissingBufferView(index~ : Int)
+  InvalidAccessor(index~ : Int)
+  UnsupportedSparseAccessor(index~ : Int)
+  InvalidComponentValue(message~ : String)
+} derive(Eq, @debug.Debug)
+pub impl Show for BinaryError
+
+pub(all) suberror BinaryWriteError {
+  EmptyJson
+  InvalidJsonPadding
+  ChunkTooLarge(length~ : Int)
+  InvalidGlbLength
+  Utf8Encoding
+} derive(Eq, @debug.Debug)
+pub impl Show for BinaryWriteError
+
 pub(all) suberror ParseError {
   InvalidJson(msg~ : String)
   MissingField(field~ : String)
@@ -295,6 +2053,27 @@ pub(all) suberror ParseError {
 pub impl Show for ParseError
 
 // Types and methods
+pub(all) struct AccessorAudit {
+  accessor : Int
+  buffer_view : Int?
+  component_size : Int
+  component_count : Int
+  element_size : Int
+  stride : Int
+  count : Int
+  payload_bytes : Int
+  padding_bytes : Int
+  contiguous : Bool
+  aligned : Bool
+  valid : Bool
+  issues : Array[String]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum AccessorDecodeMode {
+  Raw
+  Normalized
+} derive(Eq, ToJson, @debug.Debug)
+
 pub(all) struct AccessorLayout {
   accessor_index : Int
   component : ComponentInfo
@@ -323,9 +2102,76 @@ pub(all) enum AlphaMode {
   Blend
 } derive(Eq, ToJson, @debug.Debug)
 
+pub(all) struct AnimationBudget {
+  max_clips : Int
+  max_channels : Int
+  max_duration : Double
+  max_keyframes : Int
+  require_monotonic_times : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct AnimationBudgetResult {
+  passed : Bool
+  violations : Array[String]
+  clip_overage : Int
+  channel_overage : Int
+  duration_overage : Double
+  keyframe_overage : Int
+} derive(Eq, ToJson, @debug.Debug)
+
 pub(all) struct AnimationChannel {
   sampler : Int
   target : AnimationTarget
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct AnimationClipReport {
+  animation_index : Int
+  name : String?
+  channel_count : Int
+  sampler_count : Int
+  track_count : Int
+  duration : Double
+  start_time : Double
+  end_time : Double
+  loopable : Bool
+  invalid_track_count : Int
+  target_node_count : Int
+  animated_path_count : Int
+  tracks : Array[AnimationTrack]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct AnimationCompressedTrack {
+  times : Array[Double]
+  values : Array[Double]
+  component_count : Int
+  stats : AnimationCompressionStats
+  source_indices : Array[Int]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum AnimationCompressionMode {
+  KeepAll
+  RemoveLinear
+  Quantize16
+  Quantize8
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct AnimationCompressionPolicy {
+  mode : AnimationCompressionMode
+  tolerance : Double
+  minimum_keys : Int
+  preserve_endpoints : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct AnimationCompressionStats {
+  source_keys : Int
+  output_keys : Int
+  removed_keys : Int
+  source_components : Int
+  output_components : Int
+  maximum_error : Double
+  average_error : Double
+  compression_ratio : Double
+  valid : Bool
 } derive(Eq, ToJson, @debug.Debug)
 
 pub(all) struct AnimationMetadata {
@@ -343,6 +2189,40 @@ pub(all) enum AnimationPath {
   Weights
 } derive(Eq, ToJson, @debug.Debug)
 
+pub(all) enum AnimationPlaybackMode {
+  Clamp
+  Repeat
+  Mirror
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct AnimationPose {
+  animation_index : Int
+  time : Double
+  duration : Double
+  values : Array[AnimationPoseValue]
+  valid : Bool
+  errors : Array[String]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct AnimationPoseValue {
+  node : Int
+  translation : Vec3?
+  rotation : Quat?
+  scale : Vec3?
+  weights : Array[Double]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct AnimationSample {
+  time : Double
+  track_index : Int
+  node : Int?
+  path : AnimationPath
+  values : Array[Double]
+  normalized_time : Double
+  clamped : Bool
+  valid : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
 pub(all) struct AnimationSampler {
   input : Int
   output : Int
@@ -352,6 +2232,31 @@ pub(all) struct AnimationSampler {
 pub(all) struct AnimationTarget {
   node : Int?
   path : AnimationPath
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct AnimationTrack {
+  animation_index : Int
+  channel_index : Int
+  sampler_index : Int
+  node : Int?
+  path : AnimationPath
+  interpolation : Interpolation
+  input_accessor : Int
+  output_accessor : Int
+  times : Array[Double]
+  values : Array[Double]
+  component_count : Int
+  status : AnimationTrackStatus
+  errors : Array[String]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum AnimationTrackStatus {
+  Valid
+  Empty
+  InvalidReference
+  InvalidTimes
+  UnsupportedShape
+  DecodeFailed
 } derive(Eq, ToJson, @debug.Debug)
 
 pub(all) struct AssetCounts {
@@ -369,6 +2274,42 @@ pub(all) struct AssetCounts {
   skins : Int
 } derive(Eq, ToJson, @debug.Debug)
 
+pub(all) enum AssetDiffKind {
+  Added
+  Removed
+  Changed
+  Unchanged
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct AssetDiffPolicy {
+  fail_on_removed : Bool
+  fail_on_changed : Bool
+  compare_names : Bool
+  compare_geometry : Bool
+  compare_resources : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct AssetDiffReport {
+  differences : Array[AssetDifference]
+  added_count : Int
+  removed_count : Int
+  changed_count : Int
+  unchanged_count : Int
+  breaking_count : Int
+  valid : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct AssetDifference {
+  kind : AssetDiffKind
+  category : String
+  index : Int
+  path : String
+  before : String?
+  after : String?
+  severity : DiagnosticSeverity
+  message : String
+} derive(Eq, ToJson, @debug.Debug)
+
 pub(all) struct AssetReport {
   version : String
   generator : String?
@@ -380,10 +2321,172 @@ pub(all) struct AssetReport {
   diagnostics : DiagnosticSummary
 } derive(Eq, ToJson, @debug.Debug)
 
+pub(all) struct AttributeValidationIssue {
+  attribute : String
+  severity : AttributeValidationSeverity
+  code : String
+  message : String
+  index : Int?
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct AttributeValidationPolicy {
+  require_position : Bool
+  require_consistent_count : Bool
+  require_finite : Bool
+  allow_unknown : Bool
+  max_texcoord_set : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct AttributeValidationReport {
+  vertex_count : Int
+  attributes : Array[String]
+  issues : Array[AttributeValidationIssue]
+  valid : Bool
+  complete : Bool
+  score : Double
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum AttributeValidationSeverity {
+  AttributeInfo
+  AttributeWarning
+  AttributeError
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct BinaryAsset {
+  buffers : Array[BinaryBuffer]
+  glb_bin : Bytes?
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct BinaryBuffer {
+  declared_length : Int
+  bytes : Bytes
+  source : BufferSource
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct BinaryRange {
+  offset : Int
+  length : Int
+} derive(Eq, ToJson, @debug.Debug)
+
 pub(all) struct Bounds3 {
   min : Vec3
   max : Vec3
   valid : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct BufferAudit {
+  buffer : Int
+  declared_bytes : Int
+  loaded_bytes : Int
+  view_count : Int
+  accessor_count : Int
+  referenced_bytes : Int
+  unused_bytes : Int
+  overlap_bytes : Int
+  utilization : Double
+  valid : Bool
+  issues : Array[String]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct BufferLayoutPolicy {
+  max_stride : Int
+  require_alignment : Bool
+  reject_overlaps : Bool
+  warn_unused_buffers : Bool
+  max_padding_ratio : Double
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct BufferLayoutReport {
+  accessors : Array[AccessorAudit]
+  buffers : Array[BufferAudit]
+  relations : Array[BufferViewRelation]
+  total_declared_bytes : Int
+  total_referenced_bytes : Int
+  total_padding_bytes : Int
+  total_overlap_bytes : Int
+  unused_buffer_count : Int
+  invalid_accessor_count : Int
+  valid : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum BufferLayoutSeverity {
+  LayoutNote
+  LayoutWarning
+  LayoutError
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum BufferSource {
+  Embedded
+  GlbBin
+  External
+  Missing
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct BufferViewRelation {
+  left : Int
+  right : Int
+  same_buffer : Bool
+  overlaps : Bool
+  adjacent : Bool
+  shared_bytes : Int
+  valid : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct CacheBudget {
+  max_acmr : Double
+  max_atvr : Double
+  min_hit_rate : Double
+  require_indexed : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct CacheBudgetResult {
+  passed : Bool
+  violations : Array[String]
+  metrics : CacheMetrics
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct CacheCandidateScore {
+  triangle_index : Int
+  cache_hits : Int
+  new_vertices : Int
+  score : Double
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct CacheMetrics {
+  triangle_count : Int
+  index_count : Int
+  vertex_count : Int
+  transformed_vertices : Int
+  cache_hits : Int
+  cache_misses : Int
+  cache_hit_rate : Double
+  acmr : Double
+  atvr : Double
+  valid : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct CachePolicy {
+  cache_size : Int
+  max_reorder_passes : Int
+  preserve_winding : Bool
+  reject_degenerate : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct CacheReorderResult {
+  indices : Array[Int]
+  source_triangle_order : Array[Int]
+  before : CacheMetrics
+  after : CacheMetrics
+  improvement : Double
+  warnings : Array[String]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct CiAnnotation {
+  level : String
+  code : String
+  path : String
+  message : String
+  title : String
 } derive(Eq, ToJson, @debug.Debug)
 
 pub(all) struct Color4 {
@@ -408,6 +2511,22 @@ pub(all) enum ComponentType {
   UnsignedShort
   UnsignedInt
   Float
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct DecodedAccessor {
+  accessor_index : Int
+  count : Int
+  component_count : Int
+  values : Array[Double]
+  valid : Bool
+  errors : Array[String]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct DecodedVector {
+  values : Array[Vec4]
+  component_count : Int
+  valid : Bool
+  errors : Array[String]
 } derive(Eq, ToJson, @debug.Debug)
 
 pub(all) struct Diagnostic {
@@ -457,6 +2576,48 @@ pub(all) struct DiagnosticSummary {
   passed : Bool
 } derive(Eq, ToJson, @debug.Debug)
 
+pub(all) struct DocumentGeometryReport {
+  mesh_count : Int
+  primitive_count : Int
+  vertex_count : Int
+  index_count : Int
+  triangle_count : Int
+  degenerate_triangle_count : Int
+  bounds : Bounds3
+  attribute_bytes : Int
+  indexed_ratio : Double
+  cache_hit_ratio : Double
+  meshes : Array[MeshGeometryReport]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct DrawCommand {
+  mesh : Int
+  material : Int
+  lod : Int
+  first_instance : Int
+  instance_count : Int
+  bounds : SpatialAabb
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct ExtensionAudit {
+  used : Array[String]
+  required : Array[String]
+  unsupported_required : Array[String]
+  unknown_used : Array[String]
+  duplicate_used : Array[String]
+  duplicate_required : Array[String]
+  required_not_used : Array[String]
+  valid : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct ExtensionPolicy {
+  supported : Array[String]
+  allowed_required : Array[String]
+  reject_unknown_used : Bool
+  reject_unknown_required : Bool
+  reject_duplicate_declarations : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
 pub(all) enum FilterMode {
   Nearest
   Linear
@@ -464,6 +2625,99 @@ pub(all) enum FilterMode {
   LinearMipmapNearest
   NearestMipmapLinear
   LinearMipmapLinear
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GeometryAttributeStats {
+  position : GeometryPositionStats
+  normal : GeometryNormalStats
+  surface : GeometrySurfaceStats
+  bounds : SpatialAabb
+  valid : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GeometryBarycentric {
+  u : Double
+  v : Double
+  w : Double
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GeometryBudget {
+  max_vertices : Int
+  max_indices : Int
+  max_triangles : Int
+  max_draw_calls : Int
+  max_attribute_bytes : Int
+  min_cache_hit_ratio : Double
+  reject_degenerate_triangles : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GeometryBudgetResult {
+  passed : Bool
+  violations : Array[String]
+  vertex_overage : Int
+  index_overage : Int
+  triangle_overage : Int
+  draw_call_overage : Int
+  attribute_byte_overage : Int
+  cache_ratio_shortfall : Double
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GeometryChannelSummary {
+  position : Bool
+  normal : Bool
+  tangent : Bool
+  texcoord_0 : Bool
+  texcoord_1 : Bool
+  color_0 : Bool
+  joints_0 : Bool
+  weights_0 : Bool
+  custom_count : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GeometryCluster {
+  index : Int
+  triangle_indices : Array[Int]
+  vertex_indices : Array[Int]
+  bounds : SpatialAabb
+  area : Double
+  centroid : Vec3
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GeometryClusterPlan {
+  clusters : Array[GeometryCluster]
+  target_size : Int
+  largest : Int
+  smallest : Int
+  average : Double
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GeometryNormalStats {
+  count : Int
+  unit_count : Int
+  zero_count : Int
+  average : Vec3
+  minimum_length : Double
+  maximum_length : Double
+  deviation : Double
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GeometryPositionStats {
+  count : Int
+  minimum : Vec3
+  maximum : Vec3
+  center : Vec3
+  variance : Vec3
+  average_distance : Double
+  maximum_distance : Double
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GeometryRayHit {
+  triangle_index : Int
+  distance : Double
+  position : Vec3
+  normal : Vec3
+  barycentric : GeometryBarycentric
+  front_facing : Bool
 } derive(Eq, ToJson, @debug.Debug)
 
 pub(all) struct GeometryReport {
@@ -474,6 +2728,59 @@ pub(all) struct GeometryReport {
   unindexed_primitives : Int
   transformed_nodes : Int
   indexed_ratio : Double
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GeometrySample {
+  triangle_index : Int
+  position : Vec3
+  normal : Vec3
+  area : Double
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GeometrySamplingReport {
+  triangle_count : Int
+  sampled_count : Int
+  total_area : Double
+  average_area : Double
+  degenerate_count : Int
+  hits : Array[GeometryRayHit]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GeometrySurfaceStats {
+  triangle_count : Int
+  area : Double
+  minimum_area : Double
+  maximum_area : Double
+  average_area : Double
+  zero_area_count : Int
+  signed_volume : Double
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GlbBuildOptions {
+  json_padding : Char
+  bin_padding : Byte
+  include_empty_bin : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GlbBuildReport {
+  bytes : Bytes
+  json_bytes : Int
+  bin_bytes : Int
+  json_padding_bytes : Int
+  bin_padding_bytes : Int
+  total_bytes : Int
+  has_bin : Bool
+  checksum : UInt
+  valid : Bool
+  errors : Array[String]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct GlbChunkInfo {
+  index : Int
+  kind : String
+  offset : Int
+  length : Int
+  valid : Bool
 } derive(Eq, ToJson, @debug.Debug)
 
 pub(all) struct GlbData {
@@ -601,6 +2908,159 @@ pub(all) struct GltfTexture {
   source : Int?
 } derive(Eq, ToJson, @debug.Debug)
 
+pub(all) struct ImportPipeline {
+  stages : Array[ImportStage]
+  valid : Bool
+  completed_count : Int
+  failed_count : Int
+  warning_count : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct ImportPipelinePolicy {
+  fail_on_semantic_error : Bool
+  fail_on_layout_error : Bool
+  fail_on_unsafe_resource : Bool
+  run_optimization : Bool
+  run_packaging : Bool
+  emit_report : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct ImportStage {
+  index : Int
+  kind : ImportStageKind
+  name : String
+  dependencies : Array[Int]
+  status : ImportStageStatus
+  duration_hint_ms : Int
+  blocking : Bool
+  messages : Array[String]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum ImportStageKind {
+  ParseDocument
+  LoadBinary
+  ValidateStructure
+  ValidateSemantics
+  AuditLayout
+  AnalyzeGeometry
+  AnalyzeMaterials
+  AuditResources
+  AnalyzeAnimations
+  AnalyzeSkins
+  BuildOptimizationPlan
+  BuildPackagePlan
+  EmitReport
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum ImportStageStatus {
+  Pending
+  Running
+  Passed
+  PassedWithWarnings
+  Failed
+  Skipped
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct InstanceBatch {
+  key : InstanceBatchKey
+  instance_ids : Array[Int]
+  bounds : SpatialAabb
+  visible_count : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct InstanceBatchKey {
+  mesh : Int
+  material : Int
+  lod : Int
+  layer : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct InstanceBudgetResult {
+  passed : Bool
+  violations : Array[String]
+  plan : InstancePlan
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct InstancePlan {
+  instances : Array[InstanceRecord]
+  batches : Array[InstanceBatch]
+  commands : Array[DrawCommand]
+  visible_instances : Int
+  culled_instances : Int
+  batch_count : Int
+  draw_count : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct InstancePolicy {
+  max_instances : Int
+  max_batches : Int
+  max_draws : Int
+  max_lod : Int
+  allow_negative_scale : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct InstanceRecord {
+  id : Int
+  mesh : Int
+  material : Int
+  transform : InstanceTransform
+  bounds : SpatialAabb
+  layer : Int
+  visible : Bool
+  lod_bias : Double
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct InstanceTransform {
+  translation : Vec3
+  rotation : Quat
+  scale : Vec3
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct IntegrityPolicy {
+  require_checksum : Bool
+  reject_mismatch : Bool
+  reject_missing : Bool
+  reject_invalid_range : Bool
+  max_resource_bytes : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct IntegrityRange {
+  resource : Int
+  offset : Int
+  length : Int
+  checksum : UInt
+  status : IntegrityStatus
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct IntegrityRecord {
+  id : String
+  resource : Int
+  expected : UInt
+  actual : UInt
+  bytes : Int
+  status : IntegrityStatus
+  message : String
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct IntegrityReport {
+  records : Array[IntegrityRecord]
+  ranges : Array[IntegrityRange]
+  verified : Int
+  mismatches : Int
+  missing : Int
+  invalid : Int
+  total_bytes : Int
+  valid : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum IntegrityStatus {
+  IntegrityUnknown
+  IntegrityVerified
+  IntegrityMismatch
+  IntegrityMissing
+  IntegrityInvalidRange
+} derive(Eq, ToJson, @debug.Debug)
+
 pub(all) enum Interpolation {
   Linear
   Step
@@ -612,8 +3072,153 @@ pub(all) struct LayoutIssue {
   message : String
 } derive(Eq, ToJson, @debug.Debug)
 
+pub(all) struct LodBudget {
+  max_triangles : Int
+  max_memory_bytes : Int
+  max_error : Double
+  require_monotonic : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct LodBudgetResult {
+  passed : Bool
+  violations : Array[String]
+  profile : LodQualityProfile
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct LodLevel {
+  level : Int
+  triangle_ratio : Double
+  target_triangles : Int
+  target_vertices : Int
+  screen_error : Double
+  suggested : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct LodPlan {
+  levels : Array[LodLevel]
+  source_triangles : Int
+  source_vertices : Int
+  memory_reduction_ratio : Double
+  valid : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct LodQualityProfile {
+  samples : Array[LodQualitySample]
+  best_level : Int
+  worst_level : Int
+  total_memory_bytes : Int
+  total_triangles : Int
+  monotonic : Bool
+  valid : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct LodQualitySample {
+  level : Int
+  triangle_count : Int
+  vertex_count : Int
+  geometric_error : Double
+  texture_error : Double
+  silhouette_error : Double
+  memory_bytes : Int
+  screen_error : Double
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct LodSelection {
+  level : Int
+  distance : Double
+  screen_error : Double
+  switched : Bool
+  reason : String
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct LodSelectionPolicy {
+  error_tolerance : Double
+  screen_height : Double
+  hysteresis : Double
+  minimum_level : Int
+  maximum_level : Int
+} derive(Eq, ToJson, @debug.Debug)
+
 pub(all) struct Mat4 {
   values : Array[Double]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct MaterialBudget {
+  max_materials : Int
+  max_texture_slots : Int
+  max_unique_images : Int
+  max_external_images : Int
+  max_texcoord_sets : Int
+  allow_double_sided : Bool
+  allow_blend : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct MaterialBudgetResult {
+  passed : Bool
+  violations : Array[String]
+  material_overage : Int
+  texture_slot_overage : Int
+  image_overage : Int
+  external_image_overage : Int
+  texcoord_overage : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct MaterialFeatureKey {
+  has_base_texture : Bool
+  has_normal_texture : Bool
+  has_emissive_texture : Bool
+  has_occlusion_texture : Bool
+  alpha_mode : String
+  double_sided : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct MaterialIssue {
+  material : Int
+  severity : DiagnosticSeverity
+  code : String
+  path : String
+  message : String
+  hint : String?
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct MaterialReport {
+  material : Int
+  name : String?
+  alpha_mode : AlphaMode
+  texture_slot_count : Int
+  texcoord_set_count : Int
+  has_normal_map : Bool
+  has_emissive : Bool
+  has_transparency : Bool
+  double_sided : Bool
+  metallic_factor : Double
+  roughness_factor : Double
+  base_color : Color4
+  texture_slots : Array[TextureSlotReport]
+  issues : Array[MaterialIssue]
+  signature : String
+  valid : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct MaterialSample {
+  base_color : Color4
+  metallic : Double
+  roughness : Double
+  emissive : Vec3
+  alpha : Double
+  normal_scale : Double
+  occlusion_strength : Double
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct MaterialSampleStats {
+  count : Int
+  average_color : Color4
+  average_metallic : Double
+  average_roughness : Double
+  transparent_count : Int
+  metallic_count : Int
+  emissive_count : Int
+  valid : Bool
 } derive(Eq, ToJson, @debug.Debug)
 
 pub(all) struct MeshCostReport {
@@ -627,6 +3232,19 @@ pub(all) struct MeshCostReport {
   estimated_vertex_bytes : Int
 } derive(Eq, ToJson, @debug.Debug)
 
+pub(all) struct MeshGeometryReport {
+  mesh_index : Int
+  primitive_count : Int
+  vertex_count : Int
+  index_count : Int
+  triangle_count : Int
+  degenerate_triangle_count : Int
+  bounds : Bounds3
+  attribute_bytes : Int
+  cache_hit_ratio : Double
+  primitives : Array[PrimitiveGeometryReport]
+} derive(Eq, ToJson, @debug.Debug)
+
 pub(all) struct MeshMetadata {
   name : String?
   primitive_count : Int
@@ -636,6 +3254,58 @@ pub(all) struct MeshMetadata {
   vertex_count : Int
 } derive(ToJson, @debug.Debug)
 
+pub(all) struct Meshlet {
+  index : Int
+  vertices : Array[Int]
+  triangles : Array[TriangleIndex]
+  bounds : Bounds3
+  triangle_count : Int
+  vertex_count : Int
+  local_index_bytes : Int
+  valid : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct MeshletBuildReport {
+  mesh_index : Int
+  primitive_index : Int
+  limits : MeshletLimits
+  meshlets : Array[Meshlet]
+  source_triangles : Int
+  source_vertices : Int
+  partitioned_triangles : Int
+  dropped_triangles : Int
+  average_vertices : Double
+  average_triangles : Double
+  maximum_vertices : Int
+  maximum_triangles : Int
+  valid : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct MeshletLimits {
+  max_vertices : Int
+  max_triangles : Int
+  max_meshlets : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct NodeInstance {
+  node : Int
+  mesh : Int?
+  skin : Int?
+  scene : Int?
+  path : SceneNodePath
+  world_transform : Mat4
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct NodeSelection {
+  name : String?
+  name_prefix : String?
+  has_mesh : Bool?
+  has_skin : Bool?
+  has_camera : Bool?
+  leaf_only : Bool
+  scene : Int?
+} derive(Eq, ToJson, @debug.Debug)
+
 pub(all) struct NodeTreeInfo {
   total_nodes : Int
   max_depth : Int
@@ -643,6 +3313,103 @@ pub(all) struct NodeTreeInfo {
   skinned_node_count : Int
   root_nodes : Array[Int]
   node_depths : Map[Int, Int]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum NormalizationAction {
+  NormalizeUri
+  NormalizeQuaternion
+  NormalizeWeights
+  ClampMaterialFactors
+  RepairNodeNames
+  RemoveUnusedRecord
+  MergeDuplicateRecord
+  AlignBufferView
+  ReorderExtensionList
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct NormalizationFinding {
+  action : NormalizationAction
+  path : String
+  before : String
+  after : String
+  safe : Bool
+  applied : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct NormalizationPlan {
+  findings : Array[NormalizationFinding]
+  safe_count : Int
+  review_count : Int
+  valid : Bool
+  fingerprint : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct NormalizationPolicy {
+  normalize_uris : Bool
+  normalize_quaternions : Bool
+  normalize_weights : Bool
+  clamp_material_factors : Bool
+  repair_names : Bool
+  remove_unused : Bool
+  merge_duplicates : Bool
+  align_views : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct OptimizationFinding {
+  kind : OptimizationKind
+  risk : OptimizationRisk
+  priority : Int
+  target : String
+  title : String
+  reason : String
+  action : String
+  estimated_bytes_saved : Int
+  estimated_draw_calls_saved : Int
+  estimated_triangles_saved : Int
+  valid : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum OptimizationKind {
+  IndexGeometry
+  ReorderVertices
+  RemoveDegenerateTriangles
+  AddMissingNormals
+  ReduceDrawCalls
+  MergeDuplicateMaterials
+  RemoveUnusedMaterials
+  ShareDuplicateResources
+  PackageExternalResources
+  FlattenSceneHelpers
+  ReduceAnimationKeys
+  LimitSkinInfluences
+  NormalizeSkinWeights
+  RenameNodes
+  RejectUnsafeUri
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct OptimizationPlan {
+  score : Int
+  findings : Array[OptimizationFinding]
+  safe_count : Int
+  review_count : Int
+  renderer_dependent_count : Int
+  destructive_count : Int
+  estimated_bytes_saved : Int
+  estimated_draw_calls_saved : Int
+  estimated_triangles_saved : Int
+  valid : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct OptimizationPolicy {
+  index_unindexed : Bool
+  reject_degenerate : Bool
+  target_cache_hit_ratio : Double
+  remove_unused_materials : Bool
+  merge_duplicate_materials : Bool
+  package_external_resources : Bool
+  max_draw_calls : Int
+  max_animation_keys : Int
+  max_skin_influences : Int
 } derive(Eq, ToJson, @debug.Debug)
 
 pub(all) struct OptimizationReport {
@@ -654,12 +3421,54 @@ pub(all) struct OptimizationReport {
   suggestions : Array[String]
 } derive(Eq, ToJson, @debug.Debug)
 
+pub(all) enum OptimizationRisk {
+  Safe
+  Review
+  RendererDependent
+  Destructive
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct PackageEntry {
+  source_id : String
+  destination : String
+  kind : ResourceKind
+  uri : String?
+  deduplicated : Bool
+  safe : Bool
+  issues : Array[String]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct PackagePlan {
+  entries : Array[PackageEntry]
+  destination_root : String
+  total_entries : Int
+  deduplicated_entries : Int
+  unsafe_entries : Int
+  valid : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
 pub(all) struct PbrMetallicRoughness {
   base_color_factor : Color4
   base_color_texture : TextureInfo?
   metallic_factor : Double
   roughness_factor : Double
   metallic_roughness_texture : TextureInfo?
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct PrimitiveGeometryReport {
+  mesh_index : Int
+  primitive_index : Int
+  topology : String
+  vertex_count : Int
+  index_count : Int
+  triangle_count : Int
+  bounds : Bounds3
+  channels : GeometryChannelSummary
+  triangles : TriangleMetrics
+  attribute_bytes : Int
+  indexed : Bool
+  cache_hit_ratio : Double
+  overdraw_proxy : Double
 } derive(Eq, ToJson, @debug.Debug)
 
 pub(all) enum PrimitiveMode {
@@ -692,10 +3501,126 @@ pub(all) struct PrimitiveReport {
   has_weights0 : Bool
 } derive(Eq, ToJson, @debug.Debug)
 
+pub(all) enum PrimitiveWinding {
+  Unknown
+  Clockwise
+  CounterClockwise
+  Degenerate
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct ProductionGate {
+  passed : Bool
+  score : Int
+  verdict : ProductionVerdict
+  violations : Array[String]
+  warnings : Array[String]
+  metric_failures : Array[String]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct ProductionMetrics {
+  vertices : Int
+  indices : Int
+  triangles : Int
+  draw_calls : Int
+  attribute_bytes : Int
+  scene_nodes : Int
+  scene_depth : Int
+  materials : Int
+  textures : Int
+  images : Int
+  external_resources : Int
+  resource_bytes : Int
+  animations : Int
+  animation_keyframes : Int
+  skins : Int
+  skin_joints : Int
+  diagnostic_errors : Int
+  diagnostic_warnings : Int
+  semantic_errors : Int
+  semantic_warnings : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct ProductionPolicy {
+  semantic : SemanticValidationPolicy
+  geometry : GeometryBudget
+  materials : MaterialBudget
+  resources : ResourcePolicy
+  skins : SkinBudget
+  animations : AnimationBudget
+  optimization : OptimizationPolicy
+  minimum_score : Int
+  fail_on_warnings : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct ProductionProfile {
+  version : String
+  generator : String?
+  verdict : ProductionVerdict
+  metrics : ProductionMetrics
+  asset_report : AssetReport
+  semantic : SemanticValidationReport
+  geometry : DocumentGeometryReport
+  scene : SceneGraphReport
+  materials : Array[MaterialReport]
+  textures : Array[TextureReport]
+  resources : ResourceManifest
+  animations : Array[AnimationClipReport]
+  skins : Array[SkinReport]
+  optimization : OptimizationPlan
+  gate : ProductionGate
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum ProductionVerdict {
+  Pass
+  PassWithWarnings
+  Fail
+  Empty
+} derive(Eq, ToJson, @debug.Debug)
+
 pub(all) struct QualityGate {
   passed : Bool
   violations : Array[QualityViolation]
   score : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct QualityGateCheck {
+  kind : QualityGateKind
+  name : String
+  status : QualityGateStatus
+  score : Double
+  findings : Array[String]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum QualityGateKind {
+  Structural
+  Geometry
+  Materials
+  Resources
+  Runtime
+  Performance
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct QualityGateMatrix {
+  checks : Array[QualityGateCheck]
+  passed : Int
+  warnings : Int
+  failed : Int
+  skipped : Int
+  score : Double
+  release_ready : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct QualityGatePolicy {
+  minimum_score : Double
+  allow_warnings : Bool
+  require_kinds : Array[QualityGateKind]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum QualityGateStatus {
+  Passed
+  Warning
+  Failed
+  Skipped
 } derive(Eq, ToJson, @debug.Debug)
 
 pub(all) struct QualityThresholds {
@@ -716,11 +3641,47 @@ pub(all) struct QualityViolation {
   severity : DiagnosticSeverity
 } derive(Eq, ToJson, @debug.Debug)
 
+pub(all) struct QuantizationPlan {
+  attribute : String
+  component_count : Int
+  bits : Int
+  source_bounds : Bounds3
+  quantized_min : Array[Int]
+  quantized_max : Array[Int]
+  max_error : Double
+  relative_error : Double
+  estimated_bytes_saved : Int
+  valid : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
 pub(all) struct Quat {
   x : Double
   y : Double
   z : Double
   w : Double
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct ReportBundle {
+  title : String
+  verdict : String
+  score : Int
+  sections : Array[ReportSection]
+  annotations : Array[CiAnnotation]
+  lines : Array[String]
+  valid : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum ReportFormat {
+  Summary
+  Json
+  Markdown
+  Lines
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct ReportSection {
+  title : String
+  lines : Array[String]
+  passed : Bool
 } derive(Eq, ToJson, @debug.Debug)
 
 pub(all) struct ResourceDeps {
@@ -730,6 +3691,68 @@ pub(all) struct ResourceDeps {
   total_buffer_bytes : Int
   texture_image_refs : Array[Int]
 } derive(ToJson, @debug.Debug)
+
+pub(all) enum ResourceKind {
+  Buffer
+  Image
+  EmbeddedBuffer
+  EmbeddedImage
+  GlbBin
+  Unknown
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct ResourceManifest {
+  resources : Array[ResourceRecord]
+  external_count : Int
+  embedded_count : Int
+  unsafe_count : Int
+  missing_uri_count : Int
+  duplicate_uri_count : Int
+  declared_bytes : Int
+  referenced_bytes : Int
+  fingerprint : Int
+  valid : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct ResourcePolicy {
+  allow_external : Bool
+  allow_absolute_uri : Bool
+  allow_parent_segments : Bool
+  allow_data_uri : Bool
+  max_external_count : Int
+  max_total_declared_bytes : Int
+  require_file_extension : Bool
+  allowed_image_extensions : Array[String]
+  allowed_buffer_extensions : Array[String]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct ResourcePolicyResult {
+  passed : Bool
+  violations : Array[String]
+  external_overage : Int
+  byte_overage : Int
+  unsafe_count : Int
+  unsupported_extension_count : Int
+  missing_uri_count : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct ResourceRecord {
+  id : String
+  kind : ResourceKind
+  index : Int
+  uri : String?
+  normalized_uri : String?
+  extension : String?
+  media_type : String?
+  embedded : Bool
+  external : Bool
+  safe : Bool
+  declared_bytes : Int
+  mut reference_count : Int
+  fingerprint : Int
+  references : Array[String]
+  issues : Array[String]
+} derive(Eq, ToJson, @debug.Debug)
 
 pub(all) struct ResourceReport {
   declared_buffer_bytes : Int
@@ -741,9 +3764,511 @@ pub(all) struct ResourceReport {
   sparse_like_accessor_count : Int
 } derive(Eq, ToJson, @debug.Debug)
 
+pub(all) struct RuntimeBudget {
+  max_vertex_bytes : Int
+  max_index_bytes : Int
+  max_texture_bytes : Int
+  max_animation_bytes : Int
+  max_skin_bytes : Int
+  max_total_bytes : Int
+  max_stream_chunks : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct RuntimeBudgetResult {
+  passed : Bool
+  violations : Array[String]
+  vertex_overage : Int
+  index_overage : Int
+  texture_overage : Int
+  animation_overage : Int
+  skin_overage : Int
+  total_overage : Int
+  chunk_overage : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct RuntimeEstimate {
+  vertex_bytes : Int
+  index_bytes : Int
+  texture_bytes : Int
+  animation_bytes : Int
+  skin_bytes : Int
+  metadata_bytes : Int
+  total_bytes : Int
+  resident_bytes : Int
+  streamable_bytes : Int
+  stream_chunks : Int
+  peak_bytes : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct RuntimeFrameSample {
+  frame : Int
+  cpu_millis : Double
+  gpu_millis : Double
+  upload_bytes : Int
+  draw_calls : Int
+  visible_instances : Int
+  triangles : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct RuntimeStats {
+  samples : Array[RuntimeFrameSample]
+  frame_count : Int
+  average_cpu_millis : Double
+  average_gpu_millis : Double
+  p95_cpu_millis : Double
+  p95_gpu_millis : Double
+  peak_upload_bytes : Int
+  average_draw_calls : Double
+  stable : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SceneGraphReport {
+  scene_index : Int?
+  root_count : Int
+  reachable_count : Int
+  orphan_count : Int
+  leaf_count : Int
+  branch_count : Int
+  max_depth : Int
+  average_children : Double
+  duplicate_name_count : Int
+  cycle_node_count : Int
+  mesh_instance_count : Int
+  skinned_node_count : Int
+  camera_node_count : Int
+  depth_histogram : Array[Int]
+  reachable_nodes : Array[Int]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SceneNodePath {
+  scene : Int?
+  nodes : Array[Int]
+  labels : Array[String]
+  valid : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SceneQueryResult {
+  nodes : Array[Int]
+  paths : Array[SceneNodePath]
+  meshes : Array[Int]
+  skins : Array[Int]
+  cameras : Array[Int]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SceneSchedule {
+  tasks : Array[SceneTask]
+  ready : Array[Int]
+  blocked : Array[Int]
+  completed : Array[Int]
+  frame : Int
+  estimated_cost : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SceneSchedulerPolicy {
+  max_tasks : Int
+  max_cost_per_frame : Int
+  max_dependencies : Int
+  allow_failed_dependencies : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SceneSchedulerResult {
+  passed : Bool
+  violations : Array[String]
+  schedule : SceneSchedule
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SceneSnapshot {
+  scene : Int
+  nodes : Array[SceneSnapshotNode]
+  roots : Array[Int]
+  max_depth : Int
+  mesh_nodes : Int
+  skinned_nodes : Int
+  leaf_nodes : Int
+  signature : String
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SceneSnapshotChange {
+  node : Int
+  kind : String
+  before : String?
+  after : String?
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SceneSnapshotDiff {
+  changes : Array[SceneSnapshotChange]
+  added : Int
+  removed : Int
+  changed : Int
+  unchanged : Int
+  compatible : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SceneSnapshotNode {
+  index : Int
+  parent : Int?
+  child_count : Int
+  mesh : Int?
+  skin : Int?
+  camera : Int?
+  depth : Int
+  signature : String
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SceneTask {
+  id : Int
+  node : Int
+  kind : SceneTaskKind
+  state : SceneTaskState
+  dependencies : Array[Int]
+  dependents : Array[Int]
+  cost : Int
+  priority : Int
+  frame : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum SceneTaskKind {
+  Transform
+  Visibility
+  Animation
+  Skinning
+  Geometry
+  Upload
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum SceneTaskState {
+  Pending
+  Ready
+  Running
+  Complete
+  Blocked
+  Failed
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SemanticIssue {
+  severity : SemanticSeverity
+  rule : String
+  path : String
+  message : String
+  hint : String?
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum SemanticSeverity {
+  Note
+  Warning
+  Error
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SemanticValidationPolicy {
+  require_asset_version_2 : Bool
+  require_scene : Bool
+  require_scene_reachability : Bool
+  reject_duplicate_names : Bool
+  reject_negative_indices : Bool
+  require_position : Bool
+  require_material_reference : Bool
+  reject_unsafe_uris : Bool
+  reject_non_monotonic_animation_times : Bool
+  max_name_length : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SemanticValidationReport {
+  valid : Bool
+  notes : Int
+  warnings : Int
+  errors : Int
+  issues : Array[SemanticIssue]
+  checked_references : Int
+  checked_accessors : Int
+  checked_primitives : Int
+  checked_resources : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SkinBudget {
+  max_joints : Int
+  max_influences : Int
+  max_depth : Int
+  require_normalized_weights : Bool
+  allow_zero_weight_vertices : Bool
+  max_weight_error : Double
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SkinBudgetResult {
+  passed : Bool
+  violations : Array[String]
+  joint_overage : Int
+  influence_overage : Int
+  depth_overage : Int
+  weight_error : Double
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SkinIssue {
+  skin : Int
+  severity : DiagnosticSeverity
+  code : String
+  path : String
+  message : String
+  hint : String?
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SkinJointInfo {
+  skin_index : Int
+  joint_slot : Int
+  node : Int
+  parent_joint_slot : Int?
+  depth : Int
+  path : String
+  has_inverse_bind_matrix : Bool
+  world_transform : Mat4
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SkinReport {
+  skin_index : Int
+  name : String?
+  joint_count : Int
+  root_joint : Int?
+  max_depth : Int
+  duplicate_joint_count : Int
+  unreachable_joint_count : Int
+  invalid_joint_count : Int
+  inverse_bind_accessor : Int?
+  inverse_bind_matrix_count : Int
+  joints : Array[SkinJointInfo]
+  weight_summary : WeightSummary
+  issues : Array[SkinIssue]
+  valid : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SpatialAabb {
+  minimum : Vec3
+  maximum : Vec3
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SpatialBudgetResult {
+  passed : Bool
+  violations : Array[String]
+  item_count : Int
+  index : SpatialIndex
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SpatialFrustum {
+  planes : Array[SpatialPlane]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SpatialHit {
+  id : Int
+  distance : Double
+  point : Vec3
+  normal : Vec3
+  inside : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SpatialIndex {
+  items : Array[SpatialItem]
+  cell_size : Double
+  world_bounds : SpatialAabb
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SpatialItem {
+  id : Int
+  bounds : SpatialAabb
+  center : Vec3
+  radius : Double
+  layer : Int
+  active : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SpatialPlane {
+  normal : Vec3
+  distance : Double
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SpatialPolicy {
+  max_items : Int
+  max_query_results : Int
+  min_cell_size : Double
+  max_cell_size : Double
+  require_finite_bounds : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SpatialQueryResult {
+  hits : Array[SpatialHit]
+  stats : SpatialQueryStats
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SpatialQueryStats {
+  candidates : Int
+  accepted : Int
+  rejected_layer : Int
+  rejected_bounds : Int
+  rejected_distance : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct SpatialRay {
+  origin : Vec3
+  direction : Vec3
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct StreamBudget {
+  max_requests : Int
+  max_in_flight_bytes : Int
+  max_resident_bytes : Int
+  max_retries : Int
+  allow_eviction : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct StreamChunk {
+  index : Int
+  offset : Int
+  length : Int
+  kind : String
+  resident : Bool
+  dependencies : Array[Int]
+  valid : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct StreamPlan {
+  requests : Array[StreamRequest]
+  selected : StreamSelection
+  resident_bytes : Int
+  in_flight_bytes : Int
+  queued_bytes : Int
+  evictable_bytes : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum StreamPriority {
+  Critical
+  Visible
+  Prefetch
+  Background
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct StreamRequest {
+  id : Int
+  resource : Int
+  offset : Int
+  length : Int
+  priority : StreamPriority
+  dependency_count : Int
+  distance : Double
+  state : StreamState
+  retries : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct StreamSelection {
+  request_ids : Array[Int]
+  bytes : Int
+  critical_bytes : Int
+  visible_bytes : Int
+  prefetch_bytes : Int
+  background_bytes : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum StreamState {
+  Queued
+  Loading
+  Ready
+  Failed
+  Evicted
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct StreamValidation {
+  passed : Bool
+  violations : Array[String]
+  request_count : Int
+  total_bytes : Int
+} derive(Eq, ToJson, @debug.Debug)
+
 pub(all) struct TextureInfo {
   index : Int
   tex_coord : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct TextureReport {
+  texture : Int
+  name : String?
+  source_image : Int?
+  sampler : Int?
+  uri : String?
+  uri_kind : UriKind?
+  semantic_count : Int
+  semantic_names : Array[String]
+  texcoord_count : Int
+  valid : Bool
+  issues : Array[String]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum TextureSemantic {
+  BaseColor
+  MetallicRoughness
+  Normal
+  Occlusion
+  Emissive
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct TextureSlotReport {
+  material : Int
+  semantic : TextureSemantic
+  texture : Int
+  image : Int?
+  sampler : Int?
+  tex_coord : Int
+  uri : String?
+  embedded : Bool
+  external : Bool
+  valid : Bool
+  issues : Array[String]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct TopologyBudgetResult {
+  passed : Bool
+  violations : Array[String]
+  report : TopologyReport
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct TopologyComponent {
+  triangle_indices : Array[Int]
+  vertex_indices : Array[Int]
+  boundary_edge_count : Int
+  edge_count : Int
+  manifold : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct TopologyEdge {
+  first : Int
+  second : Int
+  triangle_count : Int
+  first_triangle : Int
+  second_triangle : Int?
+  same_direction : Bool
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct TopologyPolicy {
+  allow_boundary : Bool
+  allow_non_manifold : Bool
+  allow_degenerate : Bool
+  max_components : Int
+  max_isolated_vertices : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct TopologyReport {
+  triangle_count : Int
+  vertex_count : Int
+  edge_count : Int
+  boundary_edge_count : Int
+  non_manifold_edge_count : Int
+  degenerate_triangle_count : Int
+  duplicate_triangle_count : Int
+  component_count : Int
+  isolated_vertex_count : Int
+  winding_conflict_count : Int
+  components : Array[TopologyComponent]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct TopologyTriangle {
+  a : Int
+  b : Int
+  c : Int
 } derive(Eq, ToJson, @debug.Debug)
 
 pub(all) struct TransformReport {
@@ -751,6 +4276,23 @@ pub(all) struct TransformReport {
   roots : Array[Int]
   max_depth : Int
   cycle_nodes : Array[Int]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct TriangleIndex {
+  a : Int
+  b : Int
+  c : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct TriangleMetrics {
+  triangle_count : Int
+  degenerate_count : Int
+  area : Double
+  min_area : Double
+  max_area : Double
+  winding : PrimitiveWinding
+  valid_index_count : Int
+  invalid_index_count : Int
 } derive(Eq, ToJson, @debug.Debug)
 
 pub(all) struct UriInfo {
@@ -789,6 +4331,28 @@ pub(all) struct Vec3 {
   x : Double
   y : Double
   z : Double
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct Vec4 {
+  x : Double
+  y : Double
+  z : Double
+  w : Double
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct WeightSummary {
+  vertex_count : Int
+  influence_slots : Int
+  normalized_vertex_count : Int
+  non_normalized_vertex_count : Int
+  zero_weight_vertex_count : Int
+  negative_weight_count : Int
+  over_one_weight_count : Int
+  max_influences_per_vertex : Int
+  average_weight_sum : Double
+  min_weight_sum : Double
+  max_weight_sum : Double
+  valid : Bool
 } derive(Eq, ToJson, @debug.Debug)
 
 pub(all) struct WorldTransform {

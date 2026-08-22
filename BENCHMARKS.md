@@ -25,12 +25,12 @@ record the reported wall-clock values:
 Record the command, MoonBit version, OS, CPU, backend, sample count, and whether
 the first sample includes a cold build when comparing releases.
 
-## Local baseline (2026-08-18)
+## Local baseline (2026-08-19)
 
 Fixture: benchmarks/minimal.gltf (1 scene, 1 node, 0 meshes), native target,
 Windows PowerShell, Moon 0.1.20260807 / Moonc 0.10.7. Five end-to-end CLI
-samples measured with Measure-Command were **1739.72, 316.77, 309.28,
-386.85, 312.15 ms**; median **316.77 ms**. The first sample includes the native
+samples measured with Measure-Command were **1620.83, 269.31, 273.66,
+270.56, 276.35 ms**; median **273.66 ms**. The first sample includes the native
 build/cache warm-up, so subsequent comparisons should report cold and warm
 samples separately. The JSON report confirms zero diagnostics and one traversed
 node. This is a real local baseline, not a performance guarantee across hosts.
