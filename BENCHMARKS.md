@@ -35,10 +35,18 @@ build/cache warm-up, so subsequent comparisons should report cold and warm
 samples separately. The JSON report confirms zero diagnostics and one traversed
 node. This is a real local baseline, not a performance guarantee across hosts.
 
-## Local baseline (2026-08-24)
+## Local baseline (2026-08-24, Moonc 0.10.9)
 
 The same fixture and native CLI were rerun after upgrading the local stable
 toolchain to Moon 0.1.20260819 / Moonc 0.10.9. Five PowerShell samples were
 **6763.41, 1081.78, 620.03, 575.32, 475.71 ms**; median **620.03 ms**. The
 first sample includes build and cache warm-up. These numbers supersede the
 earlier local sample for comparisons made with the current toolchain.
+
+## Local baseline (2026-08-24, current stable)
+
+The fixture was rerun with the current stable toolchain, Moon 0.1.20260824 /
+Moonc 0.10.10. Five PowerShell samples were **2171.24, 418.56, 346.46,
+263.58, 272.16 ms**; median **346.46 ms**. The first sample includes build and
+cache warm-up. This is the preferred baseline for comparisons with the current
+release.

@@ -195,9 +195,9 @@ The benchmark protocol and recorded local baseline are maintained in
 moon run --target native cmd/main benchmarks/minimal.gltf --json
 ~~~~
 
-Recorded local baseline (2026-08-24): on Windows PowerShell with Moonc 0.10.9
-and the native backend, five end-to-end samples were 6763.41, 1081.78, 620.03,
-575.32, and 475.71 ms; the median was 620.03 ms. The first sample included
+Recorded local baseline (2026-08-24): on Windows PowerShell with Moonc 0.10.10
+and the native backend, five end-to-end samples were 2171.24, 418.56, 346.46,
+263.58, and 272.16 ms; the median was 346.46 ms. The first sample included
 build/cache warm-up. The fixture contains one scene and one node, and the JSON
 report contains zero diagnostics. These figures are host-dependent; historical
 samples and the exact protocol are documented in BENCHMARKS.md.
@@ -230,7 +230,7 @@ files. Review those files when public APIs change.
 
 The GitHub Actions workflow runs on Ubuntu, macOS, and Windows. It installs
 Node.js and the official stable MoonBit toolchain (verified locally at Moonc
-v0.10.9), then runs:
+v0.10.10), then runs:
 
 - moon check --target all --deny-warn;
 - native build verification;
