@@ -741,8 +741,81 @@ pub fn material_budget_result(
       None => count
     }
   })
-  let material_overage = if doc.materials.length() > budget.max_materials {
-    doc.materials.length() - budget.max_materials
+  material_budget_result_from_values(
+    doc.materials.length(),
+    texture_slots,
+    images.length(),
+    external_images,
+    material_texcoord_max(doc) + 1,
+    material_double_sided_count(doc) > 0,
+    material_alpha_mode_count(doc, Blend) > 0,
+    budget,
+  )
+}
+
+///|
+/// Evaluate a material policy from reports when the original document is not
+/// available. Report data includes the resources actually referenced by
+/// material slots, so this remains useful for cached or streamed analyses.
+pub fn material_budget_result_from_reports(
+  reports : Array[MaterialReport],
+  budget : MaterialBudget,
+) -> MaterialBudgetResult {
+  let texture_slots = reports.fold(init=0, (sum, report) => {
+    sum + report.texture_slot_count
+  })
+  let images : Map[Int, Bool] = Map([])
+  let external_images : Map[Int, Bool] = Map([])
+  let mut max_texcoord_sets = 0
+  let mut has_double_sided = false
+  let mut has_blend = false
+  for report in reports {
+    if report.texcoord_set_count > max_texcoord_sets {
+      max_texcoord_sets = report.texcoord_set_count
+    }
+    if report.double_sided {
+      has_double_sided = true
+    }
+    if report.alpha_mode == Blend {
+      has_blend = true
+    }
+    for slot in report.texture_slots {
+      match slot.image {
+        Some(image) => {
+          images[image] = true
+          if slot.external {
+            external_images[image] = true
+          }
+        }
+        None => ()
+      }
+    }
+  }
+  material_budget_result_from_values(
+    reports.length(),
+    texture_slots,
+    images.length(),
+    external_images.length(),
+    max_texcoord_sets,
+    has_double_sided,
+    has_blend,
+    budget,
+  )
+}
+
+///|
+fn material_budget_result_from_values(
+  material_count : Int,
+  texture_slots : Int,
+  unique_images : Int,
+  external_images : Int,
+  texcoord_sets : Int,
+  has_double_sided : Bool,
+  has_blend : Bool,
+  budget : MaterialBudget,
+) -> MaterialBudgetResult {
+  let material_overage = if material_count > budget.max_materials {
+    material_count - budget.max_materials
   } else {
     0
   }
@@ -751,8 +824,8 @@ pub fn material_budget_result(
   } else {
     0
   }
-  let image_overage = if images.length() > budget.max_unique_images {
-    images.length() - budget.max_unique_images
+  let image_overage = if unique_images > budget.max_unique_images {
+    unique_images - budget.max_unique_images
   } else {
     0
   }
@@ -761,9 +834,8 @@ pub fn material_budget_result(
   } else {
     0
   }
-  let max_texcoord = material_texcoord_max(doc)
-  let texcoord_overage = if max_texcoord + 1 > budget.max_texcoord_sets {
-    max_texcoord + 1 - budget.max_texcoord_sets
+  let texcoord_overage = if texcoord_sets > budget.max_texcoord_sets {
+    texcoord_sets - budget.max_texcoord_sets
   } else {
     0
   }
@@ -787,10 +859,10 @@ pub fn material_budget_result(
       "texture coordinate set budget exceeded by \{texcoord_overage}",
     )
   }
-  if !budget.allow_double_sided && material_double_sided_count(doc) > 0 {
+  if !budget.allow_double_sided && has_double_sided {
     violations.push("double-sided materials are disabled by policy")
   }
-  if !budget.allow_blend && material_alpha_mode_count(doc, Blend) > 0 {
+  if !budget.allow_blend && has_blend {
     violations.push("blend materials are disabled by policy")
   }
   {

@@ -850,6 +850,20 @@ pub fn animation_budget_result(
   reports : Array[AnimationClipReport],
   budget : AnimationBudget,
 ) -> AnimationBudgetResult {
+  ignore(doc)
+  animation_budget_result_from_reports(reports, budget)
+}
+
+///|
+/// Evaluate animation limits from already decoded reports.
+///
+/// Keeping this operation report-based makes it safe for callers that have
+/// decoded animations from a GLB buffer and prevents a second decode from an
+/// unrelated or empty binary asset.
+pub fn animation_budget_result_from_reports(
+  reports : Array[AnimationClipReport],
+  budget : AnimationBudget,
+) -> AnimationBudgetResult {
   let clip_overage = if reports.length() > budget.max_clips {
     reports.length() - budget.max_clips
   } else {
@@ -895,9 +909,11 @@ pub fn animation_budget_result(
     violations.push("animation keyframe budget exceeded by \{keyframe_overage}")
   }
   if budget.require_monotonic_times {
-    for track in all_animation_tracks(doc, binary_asset_empty()) {
-      if !animation_times_are_monotonic(track.times) {
-        violations.push("animation input times are not monotonic")
+    for report in reports {
+      for track in report.tracks {
+        if !animation_times_are_monotonic(track.times) {
+          violations.push("animation input times are not monotonic")
+        }
       }
     }
   }

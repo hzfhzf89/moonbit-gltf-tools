@@ -157,3 +157,92 @@ test "quality gate requires structural coverage" {
   inspect(matrix.release_ready, content="false")
   inspect(matrix.failed > 0, content="true")
 }
+
+///|
+test "animation budget checks decoded report timelines" {
+  let track = @gltf.AnimationTrack::{
+    animation_index: 0,
+    channel_index: 0,
+    sampler_index: 0,
+    node: Some(0),
+    path: @gltf.Translation,
+    interpolation: @gltf.Linear,
+    input_accessor: 0,
+    output_accessor: 1,
+    times: [0.0, 0.75, 0.5],
+    values: [0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.5, 0.5, 0.5],
+    component_count: 3,
+    status: @gltf.Valid,
+    errors: [],
+  }
+  let report = @gltf.AnimationClipReport::{
+    animation_index: 0,
+    name: Some("walk"),
+    channel_count: 1,
+    sampler_count: 1,
+    track_count: 1,
+    duration: 0.75,
+    start_time: 0.0,
+    end_time: 0.75,
+    loopable: false,
+    invalid_track_count: 1,
+    target_node_count: 1,
+    animated_path_count: 1,
+    tracks: [track],
+  }
+  let result = @gltf.animation_budget_result_from_reports(
+    [report],
+    @gltf.default_animation_budget(),
+  )
+  inspect(result.passed, content="false")
+  inspect(result.violations.length(), content="1")
+}
+
+///|
+test "material report budget preserves policy findings" {
+  let slot = @gltf.TextureSlotReport::{
+    material: 0,
+    semantic: @gltf.BaseColor,
+    texture: 0,
+    image: Some(2),
+    sampler: None,
+    tex_coord: 0,
+    uri: Some("textures/albedo.png"),
+    embedded: false,
+    external: true,
+    valid: true,
+    issues: [],
+  }
+  let report = @gltf.MaterialReport::{
+    material: 0,
+    name: Some("transparent-double-sided"),
+    alpha_mode: @gltf.Blend,
+    texture_slot_count: 1,
+    texcoord_set_count: 1,
+    has_normal_map: false,
+    has_emissive: false,
+    has_transparency: true,
+    double_sided: true,
+    metallic_factor: 0.0,
+    roughness_factor: 1.0,
+    base_color: @gltf.Color4::{ r: 1.0, g: 1.0, b: 1.0, a: 0.5 },
+    texture_slots: [slot],
+    issues: [],
+    signature: "test",
+    valid: true,
+  }
+  let budget = {
+    ..@gltf.default_material_budget(),
+    max_unique_images: 0,
+    max_external_images: 0,
+    max_texcoord_sets: 0,
+    allow_double_sided: false,
+    allow_blend: false,
+  }
+  let result = @gltf.material_budget_result_from_reports([report], budget)
+  inspect(result.passed, content="false")
+  inspect(result.image_overage, content="1")
+  inspect(result.external_image_overage, content="1")
+  inspect(result.texcoord_overage, content="1")
+  inspect(result.violations.length(), content="5")
+}

@@ -596,6 +596,118 @@ pub fn skin_issue_count(
 }
 
 ///|
+fn empty_weight_summary(valid : Bool) -> WeightSummary {
+  {
+    vertex_count: 0,
+    influence_slots: 0,
+    normalized_vertex_count: 0,
+    non_normalized_vertex_count: 0,
+    zero_weight_vertex_count: 0,
+    negative_weight_count: 0,
+    over_one_weight_count: 0,
+    max_influences_per_vertex: 0,
+    average_weight_sum: 0.0,
+    min_weight_sum: 0.0,
+    max_weight_sum: 0.0,
+    valid,
+  }
+}
+
+///|
+fn merge_weight_summaries(
+  left : WeightSummary,
+  right : WeightSummary,
+) -> WeightSummary {
+  let vertex_count = left.vertex_count + right.vertex_count
+  let min_weight_sum = if left.vertex_count == 0 {
+    right.min_weight_sum
+  } else if right.vertex_count == 0 {
+    left.min_weight_sum
+  } else if left.min_weight_sum < right.min_weight_sum {
+    left.min_weight_sum
+  } else {
+    right.min_weight_sum
+  }
+  {
+    vertex_count,
+    influence_slots: if left.influence_slots > right.influence_slots {
+      left.influence_slots
+    } else {
+      right.influence_slots
+    },
+    normalized_vertex_count: left.normalized_vertex_count +
+    right.normalized_vertex_count,
+    non_normalized_vertex_count: left.non_normalized_vertex_count +
+    right.non_normalized_vertex_count,
+    zero_weight_vertex_count: left.zero_weight_vertex_count +
+    right.zero_weight_vertex_count,
+    negative_weight_count: left.negative_weight_count +
+    right.negative_weight_count,
+    over_one_weight_count: left.over_one_weight_count +
+    right.over_one_weight_count,
+    max_influences_per_vertex: if left.max_influences_per_vertex >
+      right.max_influences_per_vertex {
+      left.max_influences_per_vertex
+    } else {
+      right.max_influences_per_vertex
+    },
+    average_weight_sum: if vertex_count == 0 {
+      0.0
+    } else {
+      (
+        left.average_weight_sum * left.vertex_count.to_double() +
+        right.average_weight_sum * right.vertex_count.to_double()
+      ) /
+      vertex_count.to_double()
+    },
+    min_weight_sum,
+    max_weight_sum: if left.max_weight_sum > right.max_weight_sum {
+      left.max_weight_sum
+    } else {
+      right.max_weight_sum
+    },
+    valid: left.valid && right.valid,
+  }
+}
+
+///|
+fn skin_weight_summary_for_skin(
+  doc : GltfDocument,
+  asset : BinaryAsset,
+  skin_index : Int,
+) -> WeightSummary {
+  let mut result = empty_weight_summary(true)
+  let mut found = false
+  for node in doc.nodes {
+    if node.skin == Some(skin_index) {
+      match node.mesh {
+        None => ()
+        Some(mesh_index) =>
+          match doc.meshes.get(mesh_index) {
+            None => ()
+            Some(mesh) =>
+              for primitive in mesh.primitives {
+                match primitive.attributes.get("WEIGHTS_0") {
+                  None => ()
+                  Some(_) => {
+                    let summary = skin_weight_summary(doc, asset, primitive)
+                    result = if found {
+                      merge_weight_summaries(result, summary)
+                    } else {
+                      summary
+                    }
+                    found = true
+                  }
+                }
+              }
+          }
+      }
+    }
+  }
+  result
+}
+
+///|
 pub fn skin_report(
   doc : GltfDocument,
   asset : BinaryAsset,
@@ -720,20 +832,7 @@ pub fn skin_report(
         inverse_bind_accessor: skin.inverse_bind_matrices,
         inverse_bind_matrix_count: matrices.length(),
         joints: skin_joint_infos(doc, skin_index),
-        weight_summary: {
-          vertex_count: 0,
-          influence_slots: 0,
-          normalized_vertex_count: 0,
-          non_normalized_vertex_count: 0,
-          zero_weight_vertex_count: 0,
-          negative_weight_count: 0,
-          over_one_weight_count: 0,
-          max_influences_per_vertex: 0,
-          average_weight_sum: 0.0,
-          min_weight_sum: 0.0,
-          max_weight_sum: 0.0,
-          valid: true,
-        },
+        weight_summary: skin_weight_summary_for_skin(doc, asset, skin_index),
         issues,
         valid: issues.fold(init=true, (passed, issue) => {
           passed && issue.severity != Error

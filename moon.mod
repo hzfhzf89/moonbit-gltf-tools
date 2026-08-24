@@ -1,6 +1,6 @@
 name = "hzfhzf89/moonbit-gltf-tools"
 
-version = "0.1.1"
+version = "0.1.2"
 
 readme = "README.mbt.md"
 

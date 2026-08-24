@@ -181,7 +181,10 @@ Use --json when another tool should consume the complete AssetReport.
 
 The implementation is organized as independent analysis passes over the typed
 document model. Applications can use individual passes or compose them through
-build_asset_report.
+build_asset_report. Supporting passes cover attribute validation, derived
+geometry metrics and sampling, LOD quality, material sampling, resource
+integrity, animation compression, scene scheduling/snapshots, runtime budgets,
+asset diffs, extension audits, normalization, and release-quality matrices.
 
 ## Benchmarks
 
@@ -192,11 +195,12 @@ The benchmark protocol and recorded local baseline are maintained in
 moon run --target native cmd/main benchmarks/minimal.gltf --json
 ~~~~
 
-Recorded local baseline (2026-08-19): on Windows PowerShell with the native
-backend, five end-to-end samples were 1620.83, 269.31, 273.66, 270.56, and
-276.35 ms; the median was 273.66 ms. The first sample included native
+Recorded local baseline (2026-08-24): on Windows PowerShell with Moonc 0.10.9
+and the native backend, five end-to-end samples were 6763.41, 1081.78, 620.03,
+575.32, and 475.71 ms; the median was 620.03 ms. The first sample included
 build/cache warm-up. The fixture contains one scene and one node, and the JSON
-report contains zero diagnostics. These figures are host-dependent.
+report contains zero diagnostics. These figures are host-dependent; historical
+samples and the exact protocol are documented in BENCHMARKS.md.
 
 Benchmark comparisons should record the MoonBit version, target backend,
 operating system, CPU, sample count, and whether the run includes a cold build.
@@ -225,7 +229,8 @@ files. Review those files when public APIs change.
 ## CI
 
 The GitHub Actions workflow runs on Ubuntu, macOS, and Windows. It installs
-Node.js and the stable MoonBit toolchain, then runs:
+Node.js and the official stable MoonBit toolchain (verified locally at Moonc
+v0.10.9), then runs:
 
 - moon check --target all --deny-warn;
 - native build verification;

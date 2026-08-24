@@ -216,14 +216,14 @@ pub fn production_score(
 }
 
 ///|
-pub fn production_gate(
+fn production_gate_with_results(
   metrics : ProductionMetrics,
   semantic : SemanticValidationReport,
   geometry : DocumentGeometryReport,
-  materials : Array[MaterialReport],
-  resources : ResourceManifest,
-  animations : Array[AnimationClipReport],
-  skins : Array[SkinReport],
+  material_result : MaterialBudgetResult,
+  resource_result : ResourcePolicyResult,
+  skin_result : SkinBudgetResult,
+  animation_result : AnimationBudgetResult,
   policy : ProductionPolicy,
 ) -> ProductionGate {
   let violations : Array[String] = []
@@ -231,67 +231,6 @@ pub fn production_gate(
   let metric_failures : Array[String] = []
   let score = production_score(metrics, policy)
   let geometry_result = geometry_budget_result(geometry, policy.geometry)
-  let material_result = material_budget_result(
-    {
-      version: "2.0",
-      generator: None,
-      copyright: None,
-      scenes: [],
-      nodes: [],
-      meshes: [],
-      materials: materials.map(_ => {
-        name: None,
-        pbr_metallic_roughness: {
-          base_color_factor: { r: 1.0, g: 1.0, b: 1.0, a: 1.0 },
-          base_color_texture: None,
-          metallic_factor: 0.0,
-          roughness_factor: 1.0,
-          metallic_roughness_texture: None,
-        },
-        normal_texture: None,
-        occlusion_texture: None,
-        emissive_texture: None,
-        emissive_factor: { x: 0.0, y: 0.0, z: 0.0 },
-        alpha_mode: Opaque,
-        alpha_cutoff: 0.5,
-        double_sided: false,
-      }),
-      textures: [],
-      images: [],
-      samplers: [],
-      accessors: [],
-      buffer_views: [],
-      buffers: [],
-      animations: [],
-      skins: [],
-      default_scene: None,
-    },
-    policy.materials,
-  )
-  let resource_result = resource_policy_result(resources, policy.resources)
-  let skin_result = skin_budget_result(skins, policy.skins)
-  let animation_result = animation_budget_result(
-    {
-      version: "2.0",
-      generator: None,
-      copyright: None,
-      scenes: [],
-      nodes: [],
-      meshes: [],
-      materials: [],
-      textures: [],
-      images: [],
-      samplers: [],
-      accessors: [],
-      buffer_views: [],
-      buffers: [],
-      animations: [],
-      skins: [],
-      default_scene: None,
-    },
-    animations,
-    policy.animations,
-  )
   for issue in semantic_error_issues(semantic) {
     violations.push(semantic_issue_line(issue))
   }
@@ -349,6 +288,61 @@ pub fn production_gate(
 }
 
 ///|
+/// Apply a production policy to report data that has already been collected.
+/// This compatibility entry point is useful to dashboards and cache readers
+/// that do not retain the original document.
+pub fn production_gate(
+  metrics : ProductionMetrics,
+  semantic : SemanticValidationReport,
+  geometry : DocumentGeometryReport,
+  materials : Array[MaterialReport],
+  resources : ResourceManifest,
+  animations : Array[AnimationClipReport],
+  skins : Array[SkinReport],
+  policy : ProductionPolicy,
+) -> ProductionGate {
+  production_gate_with_results(
+    metrics,
+    semantic,
+    geometry,
+    material_budget_result_from_reports(materials, policy.materials),
+    resource_policy_result(resources, policy.resources),
+    skin_budget_result(skins, policy.skins),
+    animation_budget_result_from_reports(animations, policy.animations),
+    policy,
+  )
+}
+
+///|
+/// Apply a production policy while retaining document-level resource data.
+/// This is the preferred entry point for importers because it counts unused
+/// images and non-contiguous texture-coordinate sets as well as referenced
+/// material slots.
+pub fn production_gate_for_document(
+  doc : GltfDocument,
+  metrics : ProductionMetrics,
+  semantic : SemanticValidationReport,
+  geometry : DocumentGeometryReport,
+  materials : Array[MaterialReport],
+  resources : ResourceManifest,
+  animations : Array[AnimationClipReport],
+  skins : Array[SkinReport],
+  policy : ProductionPolicy,
+) -> ProductionGate {
+  ignore(materials)
+  production_gate_with_results(
+    metrics,
+    semantic,
+    geometry,
+    material_budget_result(doc, policy.materials),
+    resource_policy_result(resources, policy.resources),
+    skin_budget_result(skins, policy.skins),
+    animation_budget_result(doc, animations, policy.animations),
+    policy,
+  )
+}
+
+///|
 pub fn build_production_profile(
   doc : GltfDocument,
   asset : BinaryAsset,
@@ -368,8 +362,8 @@ pub fn build_production_profile(
     asset_report, geometry, scene, materials, textures, resources, animations, skins,
     semantic,
   )
-  let gate = production_gate(
-    metrics, semantic, geometry, materials, resources, animations, skins, policy,
+  let gate = production_gate_for_document(
+    doc, metrics, semantic, geometry, materials, resources, animations, skins, policy,
   )
   {
     version: doc.version,

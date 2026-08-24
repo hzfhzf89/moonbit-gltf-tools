@@ -34,3 +34,11 @@ samples measured with Measure-Command were **1620.83, 269.31, 273.66,
 build/cache warm-up, so subsequent comparisons should report cold and warm
 samples separately. The JSON report confirms zero diagnostics and one traversed
 node. This is a real local baseline, not a performance guarantee across hosts.
+
+## Local baseline (2026-08-24)
+
+The same fixture and native CLI were rerun after upgrading the local stable
+toolchain to Moon 0.1.20260819 / Moonc 0.10.9. Five PowerShell samples were
+**6763.41, 1081.78, 620.03, 575.32, 475.71 ms**; median **620.03 ms**. The
+first sample includes build and cache warm-up. These numbers supersede the
+earlier local sample for comparisons made with the current toolchain.
